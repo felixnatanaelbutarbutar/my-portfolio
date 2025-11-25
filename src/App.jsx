@@ -610,7 +610,7 @@ function App() {
                 <h3>DelCheckIn – Digital Attendance</h3>
                 <p>Absensi real-time untuk 500+ pengguna, menghemat 80% waktu proses.</p>
                 <div className="project-tags">
-                  <span>React</span><span>Node.js</span><span>Realtime</span>
+                  <span>FLUTTER</span><span>SQLite</span><span>FIREBASE</span>
                 </div>
               </div>
             </div>
