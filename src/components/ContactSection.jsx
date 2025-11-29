@@ -133,7 +133,7 @@ const ContactSection = () => {
         {/* CTA Section */}
         <div className="cta-section">
           <div className="cta-card">
-            <h3 className="cta-title">Punya Proyek atau Ide?</h3>
+            <h3 className="cta-title">Have a Project in Mind?</h3>
             <p className="cta-description">
               Let's make it happen together! I am ready to help develop innovative digital solutions.            </p>
             <div className="cta-buttons">
