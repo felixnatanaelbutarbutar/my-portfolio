@@ -160,3 +160,20 @@
   .section-title { font-size: 1.8rem; }
   .skill-panel { padding: 1rem; }
 }
+
+.skill-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.05);
+}
+
+.skill-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

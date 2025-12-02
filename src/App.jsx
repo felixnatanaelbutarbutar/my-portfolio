@@ -13,6 +13,7 @@ import EducationSection from './components/EducationSection'
 // import HighlightsSection from './components/HighlightsSection'
 import ContactSection from './components/ContactSection'
 import CertificateSection from './components/CertificateSection'
+// import QuoteSection from './components/QuoteSection'
 import Footer from './components/Footer'
 
 function App() {
@@ -111,6 +112,7 @@ function App() {
       <HighlightsSection /> */}
       <ContactSection />
       <CertificateSection />
+      {/* <QuoteSection /> */}
       <Footer /> 
     </div>
   )

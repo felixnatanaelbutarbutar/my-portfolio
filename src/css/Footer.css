@@ -385,3 +385,30 @@
     transition-duration: 0.01ms !important;
   }
 }
+.footer-quote{
+    font-style: italic;
+    color: #4a5568;
+    margin-top: 15px;
+    font-size: 0.95rem;
+}
+.footer-quote {
+  position: relative;
+  display: inline-block; /* atau block sesuai layout */
+  font-style: italic; /* opsional */
+}
+
+/* buka kutip */
+.footer-quote::before {
+  content: "“"; /* atau use '"' untuk straight quote */
+  margin-right: 0.35rem;
+  font-size: 1.1em;
+  vertical-align: text-top;
+}
+
+/* tutup kutip */
+.footer-quote::after {
+  content: "”";
+  margin-left: 0.35rem;
+  font-size: 1.1em;
+  vertical-align: text-bottom;
+}

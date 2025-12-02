@@ -1,7 +1,17 @@
+import { useState, useEffect } from "react";
 import "../css/Footer.css";
 
 const Footer = ({ scrollToSection }) => {
     const currentYear = new Date().getFullYear();
+    const [activeQuote, setActiveQuote] = useState(0);
+
+    const quotes = [
+        "The only way to do great work is to love what you do.",
+        "Code is like humor. When you have to explain it, it's bad.",
+        "First, solve the problem. Then, write the code.",
+        "Any fool can write code that a computer can understand.",
+        "Innovation distinguishes between a leader and a follower."
+    ];
 
     const quickLinks = [
         { name: "Home", section: "home" },
@@ -9,7 +19,7 @@ const Footer = ({ scrollToSection }) => {
         { name: "Skills", section: "skills" },
         { name: "Experience", section: "experience" },
         { name: "Education", section: "education" },
-        { name: "Certificate", section: "certificates" }, // Fixed typo
+        { name: "Certificate", section: "certificates" },
         { name: "Contact", section: "contact" }
     ];
 
@@ -52,15 +62,22 @@ const Footer = ({ scrollToSection }) => {
         }
     ];
 
+    // rotate quotes every 30 seconds
+    useEffect(() => {
+        const id = setInterval(() => {
+            setActiveQuote((prev) => (prev + 1) % quotes.length);
+        }, 10000);
+
+        return () => clearInterval(id);
+    }); // runs once
+
     // Handler untuk scroll yang lebih reliable
     const handleLinkClick = (e, section) => {
         e.preventDefault();
 
-        // Pastikan scrollToSection ada
         if (typeof scrollToSection === 'function') {
             scrollToSection(section);
         } else {
-            // Fallback jika function tidak ada
             const element = document.getElementById(section);
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -85,8 +102,9 @@ const Footer = ({ scrollToSection }) => {
                         <p className="footer-tagline">
                             Full Stack Developer & Tech Enthusiast
                         </p>
-                        <p className="footer-description">
-                            Turning ideas into reality
+                        {/* Rotating quote */}
+                        <p className="footer-quote" aria-live="polite">
+                            {quotes[activeQuote]}
                         </p>
                     </div>
 
@@ -111,19 +129,13 @@ const Footer = ({ scrollToSection }) => {
                             <h3 className="footer-title">Connect</h3>
                             <ul className="link-list">
                                 <li>
-                                    <a href="mailto:felixnatb@gmail.com">
-                                        Email
-                                    </a>
+                                    <a href="mailto:felixnatb@gmail.com">Email</a>
                                 </li>
                                 <li>
-                                    <a href="tel:+6285142232595">
-                                        Phone
-                                    </a>
+                                    <a href="tel:+6285142232595">Phone</a>
                                 </li>
                                 <li>
-                                    <a href="https://felixnatanael.my.id" target="_blank" rel="noopener noreferrer">
-                                        Portfolio
-                                    </a>
+                                    <a href="https://felixnatanael.my.id" target="_blank" rel="noopener noreferrer">Portfolio</a>
                                 </li>
                             </ul>
                         </div>

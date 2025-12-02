@@ -1,13 +1,37 @@
-import React from "react";
-import '../css/ExperienceSection.css' // pastikan path ini sesuai struktur proyekmu
+import React, { useState, useEffect } from "react";
+import "../css/ExperienceSection.css";
 
 const ExperienceSection = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalImage, setModalImage] = useState(null);
+
+  const openImage = (imgSrc) => {
+    if (!imgSrc) return;
+    setModalImage(imgSrc);
+    setIsOpen(true);
+  };
+
+  const closeImage = () => {
+    setIsOpen(false);
+    setModalImage(null);
+  };
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (!isOpen) return;
+      if (e.key === "Escape") closeImage();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen]);
+
   const workExperience = {
     badge: "Professional",
     role: "Part-time Web Developer",
     date: "Aug 2025 – Dec 2025",
     title: "PT LPK Mori Silangit",
     company: "North Sumatra",
+    address: "Siboru-boru, North Sumatra",
     description: "Multilingual company profile with integrated student registration system",
     highlights: [
       "Developed company profile website with online student registration platform",
@@ -16,7 +40,8 @@ const ExperienceSection = () => {
       "Collaborated with internal team to deliver production-ready features"
     ],
     tech: ["Laravel", "Vue.js", "MySQL", "i18n"],
-    githubUrl: "https://github.com/felixnatanaelbutarbutar/lpk-site.git" // Tambahkan link GitHub di sini
+    githubUrl: "https://github.com/felixnatanaelbutarbutar/lpk-site.git",
+    image: "/assets/image/sik1.png"
   };
 
   const projects = [
@@ -32,7 +57,8 @@ const ExperienceSection = () => {
         "Deployed with FastAPI backend and Next.js frontend"
       ],
       tech: ["Python", "FastAPI", "Next.js", "Whisper", "PyTorch"],
-      githubUrl: "" // Tambahkan link GitHub di sini
+      githubUrl: "",
+      image: "/assets/image/ielts.png"
     },
     {
       role: "Full Stack Developer",
@@ -46,7 +72,8 @@ const ExperienceSection = () => {
         "Implemented RBAC for 4 system roles"
       ],
       tech: ["Laravel", "Inertia.js", "React", "PostgreSQL"],
-      githubUrl: "https://github.com/felixnatanaelbutarbutar/PA-II-07-Sistem-Informasi-Kemahasiswaan-IT-DEL.git" // Tambahkan link GitHub di sini
+      githubUrl: "https://github.com/felixnatanaelbutarbutar/PA-II-07-Sistem-Informasi-Kemahasiswaan-IT-DEL.git",
+      image: "/assets/image/sik1.png"
     },
     {
       role: "ML Engineer & Full-Stack Developer",
@@ -60,7 +87,8 @@ const ExperienceSection = () => {
         "Deployed interactive Streamlit web application"
       ],
       tech: ["Python", "Streamlit", "XGBoost", "TensorFlow"],
-      githubUrl: "" // Tambahkan link GitHub di sini
+      githubUrl: "",
+      image: "/assets/image/certan.png"
     },
     {
       role: "Mobile Application Developer",
@@ -74,7 +102,8 @@ const ExperienceSection = () => {
         "Reduced attendance processing time by 80%"
       ],
       tech: ["Flutter", "Dart", "Firebase", "Firestore"],
-      githubUrl: "https://github.com/felixnatanaelbutarbutar/FLUTTER-ATTENDANCE-APP-USING-FIREBASE.git" // Tambahkan link GitHub di sini
+      githubUrl: "https://github.com/felixnatanaelbutarbutar/FLUTTER-ATTENDANCE-APP-USING-FIREBASE.git",
+      image: "/assets/image/pam.png"
     },
     {
       role: "Backend & Frontend Developer",
@@ -88,7 +117,8 @@ const ExperienceSection = () => {
         "Admin module for movie and showtime management"
       ],
       tech: ["Java", "Java Swing", "PostgreSQL", "JDBC"],
-      githubUrl: "https://github.com/felixnatanaelbutarbutar/OOP-JAVA-APLIKASI-TIKET-BIOSKOP-.git" // Tambahkan link GitHub di sini
+      githubUrl: "https://github.com/felixnatanaelbutarbutar/OOP-JAVA-APLIKASI-TIKET-BIOSKOP-.git",
+      image: "/assets/image/sik1.png"
     },
     {
       role: "Business Concept Strategist",
@@ -102,7 +132,8 @@ const ExperienceSection = () => {
         "Digital platform prototype design in Figma"
       ],
       tech: ["Figma", "BMC", "Market Analysis", "Strategy"],
-      githubUrl: "" // Tambahkan link GitHub di sini (optional untuk business project)
+      githubUrl: "",
+      image: "/assets/image/tekno.png"
     },
     {
       role: "Web Developer",
@@ -116,7 +147,8 @@ const ExperienceSection = () => {
         "Increased administrative efficiency by 70%"
       ],
       tech: ["Laravel", "PHP", "MySQL", "Tailwind CSS"],
-      githubUrl: "https://github.com/felixnatanaelbutarbutar/SISTEM-INFORMASI-HKBP_PEANAJAGAR.git" // Tambahkan link GitHub di sini
+      githubUrl: "https://github.com/felixnatanaelbutarbutar/SISTEM-INFORMASI-HKBP_PEANAJAGAR.git",
+      image: "/assets/image/sik1.png"
     }
   ];
 
@@ -125,99 +157,128 @@ const ExperienceSection = () => {
       <div className="experience-container">
         <h2 className="section-title">Work Experience & Project</h2>
 
-        {/* Work Experience - Full Width Featured */}
         <div className="work-experience-wrapper">
           <div className="category-header">
             <h3 className="category-title">Work Experience</h3>
-            <div className="category-line"></div>
+            <div className="category-line" />
           </div>
-          
-          <article className="work-card featured-work">
+
+          <article className="work-card featured-work" aria-labelledby="featured-title">
             <div className="work-badge">{workExperience.badge}</div>
+
+            <div className="featured-image-wrapper">
+              <img
+                src={workExperience.image}
+                alt={`${workExperience.title} screenshot`}
+                className="featured-image full-visible"
+                onClick={() => openImage(workExperience.image)}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
             <div className="work-header">
-              <div className="work-meta">
-                <span className="work-role">{workExperience.role}</span>
-                <span className="work-date">{workExperience.date}</span>
+              <div className="work-meta" aria-hidden={false}>
+                <span className="badge-brand badge-orange work-role">{workExperience.role}</span>
+                <span className="badge-brand badge-teal work-date">{workExperience.date}</span>
+                <span className="badge-brand badge-gold work-company">{workExperience.company}</span>
+                {/* jika mau alamat terpisah */}
+                <span className="badge-brand badge-green" title="address">{workExperience.address}</span>
               </div>
-              <h3 className="work-title">{workExperience.title}</h3>
-              <p className="work-company">{workExperience.company}</p>
+
+              <h3 id="featured-title" className="work-title">{workExperience.title}</h3>
+              <p className="work-company-address">{workExperience.company} • {workExperience.address}</p>
               <p className="work-description">{workExperience.description}</p>
             </div>
+
             <ul className="work-highlights">
               {workExperience.highlights.map((item, i) => (
                 <li key={i}>{item}</li>
               ))}
             </ul>
+
             <div className="work-tech">
               {workExperience.tech.map((tech, i) => (
                 <span key={i} className="tech-tag">{tech}</span>
               ))}
             </div>
-            {workExperience.githubUrl && (
-              <a 
-                href={workExperience.githubUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="github-link"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                View on GitHub
-              </a>
-            )}
+
+            <div style={{ marginTop: 12 }}>
+              {workExperience.githubUrl && (
+                <a href={workExperience.githubUrl} target="_blank" rel="noopener noreferrer" className="github-link">
+                  View on GitHub
+                </a>
+              )}
+            </div>
           </article>
         </div>
 
-        {/* Projects Grid - Asymmetric Layout */}
         <div className="projects-wrapper">
           <div className="category-header">
             <h3 className="category-title">Academic & Personal Projects</h3>
-            <div className="category-line"></div>
+            <div className="category-line" />
           </div>
 
           <div className="projects-grid">
             {projects.map((project, index) => (
-              <article 
-                key={index} 
-                className={`project-card ${index >= 5 ? 'last-row' : ''}`}
-              >
-                <div className="card-accent"></div>
+              <article key={index} className={`project-card ${index >= 5 ? "last-row" : ""}`}>
+                <div className="project-image-wrapper">
+                  <img
+                    src={project.image}
+                    alt={`${project.title} screenshot`}
+                    className="project-image full-visible"
+                    onClick={() => openImage(project.image)}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+
+                <div className="card-accent" />
                 <div className="project-meta">
                   <span className="project-role">{project.role}</span>
                   <span className="project-date">{project.date}</span>
                 </div>
+
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-company">{project.company}</p>
                 <p className="project-description">{project.description}</p>
+
                 <ul className="project-highlights">
                   {project.highlights.map((item, i) => (
                     <li key={i}>{item}</li>
                   ))}
                 </ul>
+
                 <div className="project-tech">
                   {project.tech.map((tech, i) => (
                     <span key={i} className="tech-badge">{tech}</span>
                   ))}
                 </div>
-                {project.githubUrl && (
-                  <a 
-                    href={project.githubUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="github-link"
-                  >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    GitHub
-                  </a>
-                )}
+
+                <div style={{ marginTop: 12 }}>
+                  {project.githubUrl && (
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="github-link">
+                      GitHub
+                    </a>
+                  )}
+                </div>
               </article>
             ))}
           </div>
         </div>
       </div>
+
+      {isOpen && modalImage && (
+        <div className="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Image preview">
+          <div className="lightbox-content">
+            <button className="lightbox-close" aria-label="Close" onClick={closeImage}>✕</button>
+            <div className="lightbox-main">
+              <img src={modalImage} alt="preview" className="lightbox-image" />
+            </div>
+          </div>
+          <div className="lightbox-backdrop" onClick={closeImage} />
+        </div>
+      )}
     </section>
   );
 };

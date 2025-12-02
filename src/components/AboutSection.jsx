@@ -17,7 +17,7 @@ const IconDownload = ({ className = "" }) => (
 );
 
 const AboutSection = () => {
-  const cvPath = "/assest/pdf/CV_FelixNatanaelButarbutar.pdf"; // path sesuai yang kamu sebutkan
+  const cvPath = "/assets/pdf/CV_FelixNatanaelButarbutar.pdf"; // path sesuai yang kamu sebutkan
 
   return (
     <section id="about" className="about-section">
