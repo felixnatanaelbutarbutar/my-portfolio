@@ -1,5 +1,26 @@
 import React, { useState, useEffect } from "react";
 import "../css/ExperienceSection.css";
+import { FiGithub, FiExternalLink, FiCode, FiTool } from "react-icons/fi";
+import {
+  SiLaravel,
+  SiVuedotjs,
+  SiMysql,
+  SiPython,
+  SiFastapi,
+  SiNextdotjs,
+  SiPytorch,
+  SiReact,
+  SiPostgresql,
+  SiStreamlit,
+  SiTensorflow,
+  SiFlutter,
+  SiDart,
+  SiFirebase,
+  SiPhp,
+  SiTailwindcss,
+  SiFigma
+} from "react-icons/si";
+import { TbBrandXamarin } from "react-icons/tb";
 
 const ExperienceSection = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,13 +46,58 @@ const ExperienceSection = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, [isOpen]);
 
+  // Icon mapping untuk tech stack
+  const getTechIcon = (techName) => {
+    const iconMap = {
+      "laravel": SiLaravel,
+      "vue.js": SiVuedotjs,
+      "vue": SiVuedotjs,
+      "mysql": SiMysql,
+      "i18n": FiTool,
+      "python": SiPython,
+      "fastapi": SiFastapi,
+      "next.js": SiNextdotjs,
+      "nextjs": SiNextdotjs,
+      "whisper": FiCode,
+      "pytorch": SiPytorch,
+      "inertia.js": SiReact,
+      "inertia": SiReact,
+      "react": SiReact,
+      "postgresql": SiPostgresql,
+      "postgres": SiPostgresql,
+      "streamlit": SiStreamlit,
+      "xgboost": FiCode,
+      "tensorflow": SiTensorflow,
+      "flutter": SiFlutter,
+      "dart": SiDart,
+      "firebase": SiFirebase,
+      "firestore": SiFirebase,
+      "java": FiCode,
+      "java swing": FiCode,
+      "jdbc": FiCode,
+      "figma": SiFigma,
+      "bmc": FiTool,
+      "market analysis": FiTool,
+      "strategy": FiTool,
+      "php": SiPhp,
+      "tailwind css": SiTailwindcss,
+      "tailwind": SiTailwindcss,
+      "cobit": FiTool,
+      "itil": FiTool,
+      "iso 38500": FiTool
+    };
+
+    const key = techName.toLowerCase().trim();
+    return iconMap[key] || FiCode;
+  };
+
   const workExperience = {
     badge: "Professional",
     role: "Part-time Web Developer",
     date: "Aug 2025 – Dec 2025",
     title: "PT LPK Mori Silangit",
     company: "North Sumatra",
-    address: "Siboru-boru, North Sumatra",
+    address: "Siborongborong, North Sumatra",
     description: "Multilingual company profile with integrated student registration system",
     highlights: [
       "Developed company profile website with online student registration platform",
@@ -148,7 +214,22 @@ const ExperienceSection = () => {
       ],
       tech: ["Laravel", "PHP", "MySQL", "Tailwind CSS"],
       githubUrl: "https://github.com/felixnatanaelbutarbutar/SISTEM-INFORMASI-HKBP_PEANAJAGAR.git",
-      image: "/assets/image/sik1.png"
+      image: "/assets/image/pa1.png"
+    },
+    {
+      role: "IT Governance Project",
+      date: "Dec 2025",
+      title: "System Capacity Governance",
+      company: "Dinas X Public Service",
+      description: "Designed capacity management governance for a public service system that frequently failed during peak load.",
+      highlights: [
+        "Assessed current capacity practices using ITIL, COBIT, and ISO 38500",
+        "Identified key bottlenecks and governance gaps",
+        "Designed As-Is vs To-Be capacity processes and improvement roadmap"
+      ],
+      tech: ["COBIT", "ITIL", "ISO 38500"],
+      githubUrl: "",
+      image: "/assets/image/tkti.png"
     }
   ];
 
@@ -181,9 +262,6 @@ const ExperienceSection = () => {
               <div className="work-meta" aria-hidden={false}>
                 <span className="badge-brand badge-orange work-role">{workExperience.role}</span>
                 <span className="badge-brand badge-teal work-date">{workExperience.date}</span>
-                <span className="badge-brand badge-gold work-company">{workExperience.company}</span>
-                {/* jika mau alamat terpisah */}
-                <span className="badge-brand badge-green" title="address">{workExperience.address}</span>
               </div>
 
               <h3 id="featured-title" className="work-title">{workExperience.title}</h3>
@@ -198,15 +276,22 @@ const ExperienceSection = () => {
             </ul>
 
             <div className="work-tech">
-              {workExperience.tech.map((tech, i) => (
-                <span key={i} className="tech-tag">{tech}</span>
-              ))}
+              {workExperience.tech.map((tech, i) => {
+                const IconComponent = getTechIcon(tech);
+                return (
+                  <span key={i} className="tech-tag">
+                    <IconComponent className="tech-icon" />
+                    <span>{tech}</span>
+                  </span>
+                );
+              })}
             </div>
 
-            <div style={{ marginTop: 12 }}>
+            <div className="project-links">
               {workExperience.githubUrl && (
                 <a href={workExperience.githubUrl} target="_blank" rel="noopener noreferrer" className="github-link">
-                  View on GitHub
+                  <FiGithub />
+                  <span>View on GitHub</span>
                 </a>
               )}
             </div>
@@ -250,15 +335,22 @@ const ExperienceSection = () => {
                 </ul>
 
                 <div className="project-tech">
-                  {project.tech.map((tech, i) => (
-                    <span key={i} className="tech-badge">{tech}</span>
-                  ))}
+                  {project.tech.map((tech, i) => {
+                    const IconComponent = getTechIcon(tech);
+                    return (
+                      <span key={i} className="tech-badge">
+                        <IconComponent className="tech-icon" />
+                        <span>{tech}</span>
+                      </span>
+                    );
+                  })}
                 </div>
 
-                <div style={{ marginTop: 12 }}>
+                <div className="project-links">
                   {project.githubUrl && (
                     <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="github-link">
-                      GitHub
+                      <FiGithub />
+                      <span>GitHub</span>
                     </a>
                   )}
                 </div>
@@ -284,3 +376,4 @@ const ExperienceSection = () => {
 };
 
 export default ExperienceSection;
+// felixnatanaelbutarbutar
