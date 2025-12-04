@@ -10,7 +10,7 @@ const CERTIFICATES = [
     description: "Comprehensive training on machine learning services and best practices on AWS platform",
     skills: ["Machine Learning", "AWS SageMaker", "Deep Learning", "Model Deployment"],
     logo: "/assets/image/aws-logo.png", // Ganti dengan path logo AWS
-    credentialUrl: "", // Tambahkan URL credential jika ada
+    credentialUrl: "/assets/pdf/certificate_aws_felixnatanaelbutarbutar.pdf", // Tambahkan URL credential jika ada
     badge: "Cloud & ML"
   },
   {
@@ -22,7 +22,7 @@ const CERTIFICATES = [
     description: "Fundamental programming concepts and C language mastery",
     skills: ["C Programming", "Data Structures", "Algorithms", "Memory Management"],
     logo: "/assets/image/dicoding-logo.png", // Ganti dengan path logo Dicoding
-    credentialUrl: "", // Tambahkan URL credential jika ada
+    credentialUrl: "/assets/pdf/Dicoding Academy Certificate.pdf", // Tambahkan URL credential jika ada
     badge: "Programming"
   },
 //   {

@@ -95,7 +95,7 @@ const ExperienceSection = () => {
     badge: "Professional",
     role: "Part-time Web Developer",
     date: "Aug 2025 – Dec 2025",
-    title: "PT LPK Mori Silangit",
+    title: "PT AOKI MORI INDONESIA",
     company: "North Sumatra",
     address: "Siborongborong, North Sumatra",
     description: "Multilingual company profile with integrated student registration system",
@@ -107,7 +107,7 @@ const ExperienceSection = () => {
     ],
     tech: ["Laravel", "Vue.js", "MySQL", "i18n"],
     githubUrl: "https://github.com/felixnatanaelbutarbutar/lpk-site.git",
-    image: "/assets/image/sik1.png"
+    image: "/assets/image/lpk.png"
   };
 
   const projects = [
@@ -184,7 +184,7 @@ const ExperienceSection = () => {
       ],
       tech: ["Java", "Java Swing", "PostgreSQL", "JDBC"],
       githubUrl: "https://github.com/felixnatanaelbutarbutar/OOP-JAVA-APLIKASI-TIKET-BIOSKOP-.git",
-      image: "/assets/image/sik1.png"
+      image: "/assets/image/pbo.png"
     },
     {
       role: "Business Concept Strategist",
@@ -281,7 +281,7 @@ const ExperienceSection = () => {
                 return (
                   <span key={i} className="tech-tag">
                     <IconComponent className="tech-icon" />
-                    <span>{tech}</span>
+                    <span> {tech}</span>
                   </span>
                 );
               })}
@@ -340,7 +340,8 @@ const ExperienceSection = () => {
                     return (
                       <span key={i} className="tech-badge">
                         <IconComponent className="tech-icon" />
-                        <span>{tech}</span>
+                        <span> {tech}</span>
+                         
                       </span>
                     );
                   })}

@@ -172,9 +172,9 @@ const ICON_MAP = {
 };
 
 // helper: normalisasi nama tag
-function normalizeTagKey(name) {
-  return String(name).toLowerCase().replace(/\s+/g, "").replace(/[-_.]/g, "");
-}
+// function normalizeTagKey(name) {
+//   return String(name).toLowerCase().replace(/\s+/g, "").replace(/[-_.]/g, "");
+// }
 
 function getIconForTag(name) {
   const key = String(name).toLowerCase().trim();
