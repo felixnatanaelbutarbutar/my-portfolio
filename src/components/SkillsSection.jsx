@@ -43,7 +43,7 @@ const SKILLS_DATA = [
       "Java",
       "Python",
       "Golang",
-      { name: "JavaScript", level: 85 },
+      "Javascript",
       "TypeScript",
       "Dart"
     ]

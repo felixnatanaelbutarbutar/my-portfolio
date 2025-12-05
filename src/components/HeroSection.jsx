@@ -108,7 +108,7 @@ const HeroSection = ({ scrollToSection }) => {
             <p className="home-subtitle fade-in">
               <span className="subtitle-text">Full Stack Developer</span>
               <span className="divider">|</span>
-              <span className="subtitle-text">UI/UX Enthusiast</span>
+              {/* <span className="subtitle-text">UI/UX Enthusiast</span> */}
             </p>
             <p className="description fade-in">
               Crafting digital experiences with modern technologies and creative solutions. 

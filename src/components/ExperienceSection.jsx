@@ -137,7 +137,7 @@ const ExperienceSection = () => {
         "Secure PostgreSQL database schema for 24 functional features",
         "Implemented RBAC for 4 system roles"
       ],
-      tech: ["Laravel", "Inertia.js", "React", "PostgreSQL"],
+      tech: ["Laravel", "Inertia.js", "React", "PostgreSQL","Typescript"],
       githubUrl: "https://github.com/felixnatanaelbutarbutar/PA-II-07-Sistem-Informasi-Kemahasiswaan-IT-DEL.git",
       image: "/assets/image/sik1.png"
     },
