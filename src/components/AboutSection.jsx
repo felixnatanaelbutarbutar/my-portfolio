@@ -34,7 +34,7 @@ const AboutSection = () => {
             <div className="about-body">
               <p>
                 Diploma (D3) Information Technology student at Institut Teknologi Del with hands-on experience as a Part-time
-                Web Developer at PT LPK Mori Silangit. Built and deployed a production-ready company profile and online student
+                Web Developer at PT AOKI MORI INDONESIA. Built and deployed a production-ready company profile and online student
                 registration system with multilingual support (Japanese, English, Indonesian) and responsive UI. Comfortable working
                 on both frontend and backend to turn business requirements into working features. Currently seeking a Software
                 Engineer Internship where I can contribute to real projects, improve my skills, and learn from experienced engineers,

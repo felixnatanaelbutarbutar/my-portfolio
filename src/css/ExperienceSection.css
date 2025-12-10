@@ -121,14 +121,13 @@
 }
 
 /* ============================================
-   WORK EXPERIENCE (FEATURED) - changed to white card
+   WORK EXPERIENCE (FEATURED)
    ============================================ */
 
 .work-experience-wrapper { margin-bottom: 64px; }
 
-/* Featured work now white like project cards, but with subtle accent */
 .featured-work {
-  background: #ffffff; /* changed to white */
+  background: #ffffff;
   border-radius: 20px;
   padding: 28px;
   color: var(--text-dark);
@@ -142,7 +141,6 @@
   animation: slideInLeft 0.6s ease-out;
 }
 
-/* smaller decorative accent circle — non-blocking */
 .featured-work::before {
   content: '';
   position: absolute;
@@ -167,7 +165,6 @@
     0 0 0 1px rgba(102,126,234,0.04) inset;
 }
 
-/* badge in corner becomes subtle */
 .work-badge {
   position: absolute;
   top: 18px;
@@ -184,7 +181,6 @@
   box-shadow: none;
 }
 
-/* header & meta */
 .work-header { margin-bottom: 16px; }
 
 .work-meta {
@@ -195,7 +191,6 @@
   flex-wrap: wrap;
 }
 
-/* ROLE / DATE / COMPANY — use distinct brand color badges */
 .badge-brand {
   display: inline-flex;
   align-items: center;
@@ -210,7 +205,6 @@
   white-space: nowrap;
 }
 
-/* Individual color variants */
 .badge-orange { background: linear-gradient(90deg, var(--brand-orange), #ff7a3a); }
 .badge-teal   { background: linear-gradient(90deg, var(--brand-teal), #0aa599); }
 .badge-gold   { background: linear-gradient(90deg, var(--brand-gold), #f3c07a); color: #1a1a1a; }
@@ -220,7 +214,6 @@
 .work-date { font-size: 0.9rem; font-weight: 600; }
 .work-company { font-size: 0.95rem; font-weight: 600; color: #2d3748; }
 
-/* title & description */
 .work-title {
   font-size: 1.6rem;
   font-weight: 800;
@@ -235,7 +228,6 @@
   font-size: 0.95rem;
 }
 
-/* description */
 .work-description {
   font-size: 1rem;
   line-height: 1.6;
@@ -244,7 +236,6 @@
   font-style: italic;
 }
 
-/* highlights */
 .work-highlights {
   list-style: none;
   padding: 0;
@@ -278,7 +269,6 @@
   color: white;
 }
 
-/* tech badges in featured white card: subtle outline using brand gradient */
 .work-tech {
   display: flex;
   flex-wrap: wrap;
@@ -301,7 +291,7 @@
 .tech-tag:hover { transform: translateY(-2px); }
 
 /* ============================================
-   IMAGE: FULL-VISIBLE (NO CROP) + CLICKABLE
+   IMAGE WRAPPER & SLIDER
    ============================================ */
 
 .featured-image-wrapper,
@@ -338,7 +328,10 @@
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 .featured-image:hover,
-.full-visible:hover { transform: translateY(-6px); box-shadow: 0 24px 54px rgba(2,6,23,0.10); }
+.full-visible:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 54px rgba(2,6,23,0.10);
+}
 
 .project-image.full-visible {
   width: 100%;
@@ -346,6 +339,55 @@
   max-height: 360px;
   object-fit: contain;
   border-radius: 10px;
+}
+
+/* Slider controls */
+.slider-container {
+  position: relative;
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(15,23,36,0.7);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0;
+}
+
+.slider-arrow-left { left: 10px; }
+.slider-arrow-right { right: 10px; }
+
+.slider-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+
+.slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255,255,255,0.6);
+  cursor: pointer;
+  padding: 0;
+}
+.slider-dot.active {
+  width: 18px;
+  background: var(--accent-start);
 }
 
 /* responsive small screens */
@@ -365,7 +407,7 @@
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
   animation: fadeIn 1s ease-out;
 }
@@ -418,7 +460,6 @@
 }
 .project-card:hover .card-accent { opacity: 1; }
 
-/* project meta and text */
 .project-meta {
   display: flex;
   align-items: center;
@@ -509,7 +550,7 @@
 }
 
 /* ============================================
-   GITHUB LINK BUTTON (styles)
+   GITHUB LINK BUTTON
    ============================================ */
 .github-link {
   display: inline-flex;
@@ -535,7 +576,7 @@
    ============================================ */
 @media (max-width: 1024px) {
   .projects-grid { grid-template-columns: repeat(2, 1fr) !important; }
-  .project-card, .project-card.last-row { grid-column: span 1 !important; }
+  .project-card { grid-column: span 1 !important; }
 }
 
 @media (max-width: 768px) {
@@ -567,7 +608,7 @@
 }
 
 /* ============================================
-   LIGHTBOX / MODAL (single image preview)
+   LIGHTBOX / MODAL
    ============================================ */
 .lightbox-overlay {
   position: fixed;
