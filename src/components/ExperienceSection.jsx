@@ -27,7 +27,6 @@ import {
   SiTailwindcss,
   SiFigma
 } from "react-icons/si";
-import { TbBrandXamarin } from "react-icons/tb";
 
 const ExperienceSection = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -114,7 +113,15 @@ const ExperienceSection = () => {
     ],
     tech: ["Laravel", "Vue.js", "MySQL", "i18n"],
     githubUrl: "https://github.com/felixnatanaelbutarbutar/lpk-site.git",
-    image: "/assets/image/lpk.png"
+    websiteUrl: "https://lpkmoricentre.co.id",
+    images: [
+      "/assets/image/lpk (1).png",
+      "/assets/image/lpk (2).png",
+      "/assets/image/lpk (3).png",
+      "/assets/image/lpk (4).png",
+      "/assets/image/lpk (5).png",
+      "/assets/image/lpk (6).png"
+    ]
   };
 
   const projects = [
@@ -131,11 +138,7 @@ const ExperienceSection = () => {
         "Deployed with FastAPI backend and Next.js frontend"
       ],
       tech: ["Python", "FastAPI", "Next.js", "Whisper", "PyTorch"],
-      images: [
-        "/assets/image/ielts.png",
-        // "/assets/image/ielts2.png",
-        // "/assets/image/ielts3.png"
-      ]
+      images: ["/assets/image/ielts.png"]
     },
     {
       role: "Full Stack Developer",
@@ -172,10 +175,7 @@ const ExperienceSection = () => {
         "Deployed interactive Streamlit web application"
       ],
       tech: ["Python", "Streamlit", "XGBoost", "TensorFlow"],
-      images: [
-        "/assets/image/certan.png", 
-        // "/assets/image/certan2.png"
-      ]
+      images: ["/assets/image/certan.png"]
     },
     {
       role: "Mobile Application Developer",
@@ -190,10 +190,7 @@ const ExperienceSection = () => {
         "Reduced attendance processing time by 80%"
       ],
       tech: ["Flutter", "Dart", "Firebase", "Firestore"],
-      images: [
-        "/assets/image/pam.png", 
-        // "/assets/image/pam2.png"
-      ],
+      images: ["/assets/image/pam.png"],
       githubUrl:
         "https://github.com/felixnatanaelbutarbutar/FLUTTER-ATTENDANCE-APP-USING-FIREBASE.git"
     },
@@ -210,10 +207,7 @@ const ExperienceSection = () => {
         "Admin module for movie and showtime management"
       ],
       tech: ["Java", "Java Swing", "PostgreSQL", "JDBC"],
-      images: [
-        "/assets/image/pbo.png", 
-        // "/assets/image/pbo2.png"
-      ],
+      images: ["/assets/image/pbo.png"],
       githubUrl:
         "https://github.com/felixnatanaelbutarbutar/OOP-JAVA-APLIKASI-TIKET-BIOSKOP-.git"
     },
@@ -246,7 +240,7 @@ const ExperienceSection = () => {
       ],
       tech: ["Laravel", "PHP", "MySQL", "Tailwind CSS"],
       images: [
-        "/assets/image/pa1.png", 
+        "/assets/image/pa1.png",
         "/assets/image/pa1login.png",
         "/assets/image/pa1admin.png",
         "/assets/image/pa1schema.png"
@@ -271,10 +265,29 @@ const ExperienceSection = () => {
     }
   ];
 
-  // Slider untuk tiap project
-  const ProjectImageSlider = ({ images, onImageClick }) => {
+  // Slider Component dengan lazy loading
+  const ImageSlider = ({ images, onImageClick, isLarge = false }) => {
     const validImages = images && images.length > 0 ? images : [];
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [loadedImages, setLoadedImages] = useState(new Set([0]));
+
+    useEffect(() => {
+      // Preload adjacent images
+      const preloadIndexes = [
+        currentIndex - 1 >= 0 ? currentIndex - 1 : validImages.length - 1,
+        currentIndex + 1 < validImages.length ? currentIndex + 1 : 0
+      ];
+      
+      preloadIndexes.forEach(idx => {
+        if (!loadedImages.has(idx)) {
+          const img = new Image();
+          img.src = validImages[idx];
+          img.onload = () => {
+            setLoadedImages(prev => new Set([...prev, idx]));
+          };
+        }
+      });
+    }, [currentIndex, validImages, loadedImages]);
 
     if (!validImages.length) return null;
 
@@ -300,13 +313,13 @@ const ExperienceSection = () => {
     const currentImage = validImages[currentIndex];
 
     return (
-      <div className="project-image-wrapper slider-container">
+      <div className={`slider-container ${isLarge ? 'slider-large' : ''}`}>
         <img
           src={currentImage}
-          alt="project screenshot"
-          className="project-image full-visible"
+          alt={`Screenshot ${currentIndex + 1}`}
+          className={`slider-image ${isLarge ? 'full-visible' : 'project-image'}`}
           onClick={() => onImageClick(currentImage)}
-          loading="lazy"
+          loading={loadedImages.has(currentIndex) ? "eager" : "lazy"}
           decoding="async"
         />
 
@@ -351,8 +364,9 @@ const ExperienceSection = () => {
   return (
     <section id="experience" className="experience-section">
       <div className="experience-container">
-        <h2 className="section-title">Work Experience & Project</h2>
+        <h2 className="section-title">Work Experience & Projects</h2>
 
+        {/* WORK EXPERIENCE */}
         <div className="work-experience-wrapper">
           <div className="category-header">
             <h3 className="category-title">Work Experience</h3>
@@ -365,14 +379,12 @@ const ExperienceSection = () => {
           >
             <div className="work-badge">{workExperience.badge}</div>
 
+            {/* Image Slider untuk Work Experience */}
             <div className="featured-image-wrapper">
-              <img
-                src={workExperience.image}
-                alt={`${workExperience.title} screenshot`}
-                className="featured-image full-visible"
-                onClick={() => openImage(workExperience.image)}
-                loading="lazy"
-                decoding="async"
+              <ImageSlider
+                images={workExperience.images}
+                onImageClick={openImage}
+                isLarge={true}
               />
             </div>
 
@@ -416,6 +428,17 @@ const ExperienceSection = () => {
             </div>
 
             <div className="project-links">
+              {workExperience.websiteUrl && (
+                <a
+                  href={workExperience.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="website-link"
+                >
+                  <FiExternalLink />
+                  <span>Visit Website</span>
+                </a>
+              )}
               {workExperience.githubUrl && (
                 <a
                   href={workExperience.githubUrl}
@@ -431,6 +454,7 @@ const ExperienceSection = () => {
           </article>
         </div>
 
+        {/* PROJECTS */}
         <div className="projects-wrapper">
           <div className="category-header">
             <h3 className="category-title">Academic & Personal Projects</h3>
@@ -440,11 +464,14 @@ const ExperienceSection = () => {
           <div className="projects-grid">
             {projects.map((project, index) => (
               <article key={index} className="project-card">
-                {/* Slider baru */}
-                <ProjectImageSlider
-                  images={project.images || (project.image ? [project.image] : [])}
-                  onImageClick={openImage}
-                />
+                {/* Image Slider untuk Projects */}
+                <div className="project-image-wrapper">
+                  <ImageSlider
+                    images={project.images}
+                    onImageClick={openImage}
+                    isLarge={false}
+                  />
+                </div>
 
                 <div className="card-accent" />
                 <div className="project-meta">
@@ -493,6 +520,7 @@ const ExperienceSection = () => {
         </div>
       </div>
 
+      {/* LIGHTBOX MODAL */}
       {isOpen && modalImage && (
         <div
           className="lightbox-overlay"
