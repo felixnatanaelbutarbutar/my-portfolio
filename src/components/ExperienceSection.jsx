@@ -102,7 +102,7 @@ const ExperienceSection = () => {
     role: "Part-time Web Developer",
     date: "Aug 2025 – Dec 2025",
     title: "PT AOKI MORI INDONESIA",
-    company: "North Sumatra",
+    // company: "North Sumatra",
     address: "Siborongborong, North Sumatra",
     description: "Multilingual company profile with integrated student registration system",
     highlights: [
@@ -115,10 +115,11 @@ const ExperienceSection = () => {
     githubUrl: "https://github.com/felixnatanaelbutarbutar/lpk-site.git",
     websiteUrl: "https://lpkmoricentre.co.id",
     images: [
+      "/assets/image/lpk (4).png",
       "/assets/image/lpk (1).png",
       "/assets/image/lpk (2).png",
       "/assets/image/lpk (3).png",
-      "/assets/image/lpk (4).png",
+      
       "/assets/image/lpk (5).png",
       "/assets/image/lpk (6).png"
     ]
