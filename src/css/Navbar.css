@@ -45,7 +45,11 @@
 .logo-text {
   position: relative;
 }
-
+.logo-image {
+  height: 35px; /* Sesuaikan tinggi logo sesuai navbar */
+  width: auto;  /* Biarkan lebar menyesuaikan proporsi */
+  object-fit: contain;
+}
 .logo-dot {
   color: #667eea;
   font-size: 2rem;

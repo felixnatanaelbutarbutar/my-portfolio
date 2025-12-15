@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../css/Footer.css";
+import navLogo from '/assets/image/logonavbar.png';
 
 const Footer = ({ scrollToSection }) => {
     const currentYear = new Date().getFullYear();
@@ -91,13 +92,12 @@ const Footer = ({ scrollToSection }) => {
                 {/* Footer Top */}
                 <div className="footer-top">
                     <div className="footer-brand">
-                        <div
-                            className="footer-logo"
-                            onClick={() => handleLinkClick({ preventDefault: () => { } }, 'home')}
-                            style={{ cursor: 'pointer' }}
-                        >
-                            <span className="logo-text">Felix Natanael</span>
-                            <span className="logo-dot">.</span>
+                        <div className="nav-logo" onClick={() => scrollToSection('home')}>
+                            <img
+                                src={navLogo}
+                                alt="Felix Natanael Logo"
+                                className="logo-image"
+                            />
                         </div>
                         <p className="footer-tagline">
                             Full Stack Developer & Tech Enthusiast

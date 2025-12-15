@@ -1,4 +1,5 @@
 import '../css/Navbar.css' // pastikan path ini sesuai struktur proyekmu
+import navLogo from '/assets/image/logonavbar.png';
 
 const Navbar = ({ activeSection, isMenuOpen, toggleMenu, scrollToSection }) => {
   return (
@@ -6,10 +7,13 @@ const Navbar = ({ activeSection, isMenuOpen, toggleMenu, scrollToSection }) => {
       <nav className="navbar">
         <div className="nav-container">
           <div className="nav-logo" onClick={() => scrollToSection('home')}>
-            <span className="logo-text">Felix Natanael</span>
-            <span className="logo-dot">.</span>
+            <img
+              src={navLogo}
+              alt="Felix Natanael Logo"
+              className="logo-image"
+            />
           </div>
-          
+
           <button
             className={`hamburger ${isMenuOpen ? 'active' : ''}`}
             onClick={toggleMenu}
@@ -19,11 +23,11 @@ const Navbar = ({ activeSection, isMenuOpen, toggleMenu, scrollToSection }) => {
             <span></span>
             <span></span>
           </button>
-          
+
           {isMenuOpen && (
             <div className="menu-overlay" onClick={toggleMenu}></div>
           )}
-          
+
           <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
             <li>
               <a
