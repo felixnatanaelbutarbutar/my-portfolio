@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'skills', 'experience', 'gallery', 'projects', 'education', 'organization', 'highlights','certificates', 'contact']
+      const sections = ['home', 'about', 'skills', 'experience', 'gallery', 'projects', 'education', 'organization', 'highlights', 'certificates', 'contact']
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -95,7 +95,7 @@ function App() {
       {/* Custom Cursor */}
       <div className="custom-cursor"></div>
 
-      <Navbar 
+      <Navbar
         activeSection={activeSection}
         isMenuOpen={isMenuOpen}
         toggleMenu={toggleMenu}
@@ -113,7 +113,9 @@ function App() {
       <ContactSection />
       <CertificateSection />
       {/* <QuoteSection /> */}
-      <Footer /> 
+      <Footer />
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8196421968741590"
+        crossorigin="anonymous"></script>
     </div>
   )
 }

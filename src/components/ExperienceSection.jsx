@@ -118,8 +118,7 @@ const ExperienceSection = () => {
       "/assets/image/lpk (4).png",
       "/assets/image/lpk (1).png",
       "/assets/image/lpk (2).png",
-      "/assets/image/lpk (3).png",
-      
+      "/assets/image/lpk (3).png",     
       "/assets/image/lpk (5).png",
       "/assets/image/lpk (6).png"
     ]
@@ -150,7 +149,7 @@ const ExperienceSection = () => {
         "Comprehensive campus information system with 24 features and 4 role-based access levels",
       highlights: [
         "Full-stack architecture using Laravel and Inertia.js with React",
-        "Secure PostgreSQL database schema for 24 functional features",
+        "Secure PostgreSQL database schema for 25  functional features",
         "Implemented RBAC for 4 system roles"
       ],
       tech: ["Laravel", "Inertia.js", "React", "PostgreSQL", "Typescript"],
