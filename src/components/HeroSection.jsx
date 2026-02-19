@@ -200,7 +200,7 @@ const HeroSection = ({ scrollToSection }) => {
             {/* Title Line */}
             <div className="text-reveal-box">
               <span className="title-line rolling-text delay-1">
-                Building the future, I'm
+                Buildingk the future, I'm
               </span>
             </div>
 
