@@ -1,5 +1,5 @@
 /* ========================
-   HERO SECTION
+   HERO SECTION — editorial layout
    ======================== */
 
 .hero {
@@ -7,230 +7,302 @@
   display: flex;
   align-items: center;
   position: relative;
-  padding: 100px 0 80px;
+  padding: 0;
   background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1428 100%);
   color: #fff;
   overflow: hidden;
 }
 
-/* Soft ambient glow — one static, blurred circle for warmth */
-.hero__glow {
+/* Subtle grain texture for organic feel */
+.hero__bg {
   position: absolute;
-  top: 20%;
-  left: 15%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
-  filter: blur(80px);
+  inset: 0;
   pointer-events: none;
+}
+
+.hero__bg-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
 }
 
 /* Container */
 .hero__container {
-  max-width: 1080px;
   width: 100%;
+  max-width: 1160px;
   margin: 0 auto;
-  padding: 0 32px;
-  position: relative;
-}
-
-/* Grid — photo left, text right for warmth */
-.hero__grid {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 80px;
-  align-items: center;
-  min-height: 75vh;
-}
-
-/* ========================
-   PHOTO
-   ======================== */
-
-.hero__photo-col {
+  padding: 100px 40px 60px;
   display: flex;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s;
-}
-
-.hero--visible .hero__photo-col {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.hero__photo-frame {
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
   position: relative;
-  padding: 6px;
-  border-radius: 50%;
-  background: linear-gradient(160deg,
-      rgba(167, 139, 250, 0.2) 0%,
-      rgba(139, 92, 246, 0.06) 50%,
-      rgba(99, 102, 241, 0.15) 100%);
-}
-
-.hero__photo {
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.5s ease, filter 0.5s ease;
-  filter: brightness(0.95);
-}
-
-.hero__photo:hover {
-  transform: scale(1.03);
-  filter: brightness(1.05);
 }
 
 /* ========================
-   TEXT
+   CENTER — the name is the hero
    ======================== */
 
-.hero__text {
+.hero__center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0;
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+  transition: opacity 0.8s ease 0.3s;
 }
 
-.hero--visible .hero__text {
+.hero--visible .hero__center {
   opacity: 1;
-  transform: translateY(0);
 }
 
-/* Greeting */
-.hero__greeting {
-  display: block;
+.hero__hi {
   font-size: 1rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.45);
-  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 0 12px;
   letter-spacing: 0.5px;
 }
 
-/* Name */
 .hero__name {
-  font-size: clamp(2.6rem, 5.5vw, 4rem);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -1px;
-  margin: 0 0 20px;
-  min-height: 2.4em;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -3px;
+  margin: 0;
   color: #fff;
+  position: relative;
+  transform: scale(0.97);
+  transform-origin: left center;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hero__name-line {
+/* Subtle scale settle — name "lands" after typing finishes */
+.hero__name--settled {
+  transform: scale(1);
+}
+
+.hero__name-first {
+  display: inline-block;
+  position: relative;
+  transition: color 0.4s ease-in-out;
+}
+
+/* Hover underline — thin line slides in from left */
+.hero__name-first::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(167, 139, 250, 0.6), rgba(139, 92, 246, 0.2));
+  border-radius: 1px;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero__name:hover .hero__name-first::after {
+  width: 100%;
+}
+
+.hero__name:hover .hero__name-first {
+  color: rgba(199, 183, 255, 0.95);
+}
+
+.hero__name-last {
   display: block;
+  color: rgba(255, 255, 255, 0.35);
+  transition: color 0.4s ease-in-out;
 }
 
-/* Cursor — thin, elegant */
+.hero__name:hover .hero__name-last {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Cursor */
 .hero__cursor {
   display: inline-block;
-  width: 2px;
-  height: 0.9em;
+  width: 3px;
+  height: 0.75em;
   background: rgba(167, 139, 250, 0.6);
-  margin-left: 4px;
+  margin-left: 6px;
   vertical-align: text-bottom;
-  animation: cursorBlink 1s ease-in-out infinite;
+  animation: blink 1s ease-in-out infinite;
 }
 
-@keyframes cursorBlink {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
+@keyframes blink {
   50% {
     opacity: 0;
   }
 }
 
-/* Role */
-.hero__role {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: rgba(167, 139, 250, 0.7);
-  margin: 0 0 20px;
-  letter-spacing: 0.3px;
-}
-
-/* Description */
-.hero__desc {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: rgba(255, 255, 255, 0.45);
-  margin: 0 0 36px;
-  max-width: 480px;
-  font-weight: 400;
-}
-
 /* ========================
-   BUTTONS — softer, human
+   BOTTOM — split info row
    ======================== */
 
+.hero__bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 0.6s ease 0.6s;
+}
+
+.hero--visible .hero__bottom {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Left: identity */
+.hero__identity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.hero__avatar {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 2;
+  transition: border-color 0.4s ease;
+}
+
+/* Rotating dashed ring — appears on hover, spins slowly */
+.hero__identity::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 137px;
+  height: 137px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(167, 139, 250, 0);
+  transition: border-color 0.5s ease;
+  z-index: 1;
+  animation: idleRing 20s linear infinite;
+  animation-play-state: paused;
+}
+
+.hero__identity:hover::before {
+  border-color: rgba(167, 139, 250, 0.3);
+  animation-play-state: running;
+}
+
+.hero__identity:hover .hero__avatar {
+  border-color: rgba(167, 139, 250, 0.2);
+}
+
+@keyframes idleRing {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Text next to avatar */
+.hero__role {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  transition: transform 0.3s ease;
+}
+
+.hero__loc {
+  display: block;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 3px;
+  transition: transform 0.3s ease 0.05s;
+}
+
+.hero__identity:hover .hero__role {
+  transform: translateX(4px);
+}
+
+.hero__identity:hover .hero__loc {
+  transform: translateX(4px);
+}
+
+/* Right: info + buttons */
+.hero__info {
+  display: flex;
+  align-items: flex-end;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.hero__desc {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+  max-width: 360px;
+}
+
+/* Buttons */
 .hero__actions {
   display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .hero__btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 11px 26px;
-  font-size: 0.88rem;
-  font-weight: 500;
-  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
-  transition: all 0.25s ease;
-  letter-spacing: 0.2px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .hero__btn--fill {
-  background: rgba(139, 92, 246, 0.85);
-  color: #fff;
-  box-shadow: 0 1px 4px rgba(139, 92, 246, 0.15);
+  background: #fff;
+  color: #0f172a;
 }
 
 .hero__btn--fill:hover {
-  background: rgba(139, 92, 246, 1);
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.25);
+  background: #f1f5f9;
   transform: translateY(-1px);
-}
-
-.hero__btn--fill:active {
-  transform: translateY(0);
 }
 
 .hero__btn--ghost {
   background: transparent;
-  color: rgba(255, 255, 255, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .hero__btn--ghost:hover {
   color: rgba(255, 255, 255, 0.85);
-  border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-1px);
 }
 
-.hero__btn--ghost:active {
-  transform: translateY(0);
-}
-
 /* ========================
-   SCROLL HINT — minimal line
+   SCROLL LINE
    ======================== */
 
 .hero__scroll {
   position: absolute;
-  bottom: 28px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   background: none;
@@ -238,7 +310,7 @@
   cursor: pointer;
   padding: 8px;
   opacity: 0;
-  transition: opacity 0.6s ease 1.6s;
+  transition: opacity 0.6s ease 1.2s;
 }
 
 .hero--visible .hero__scroll {
@@ -248,24 +320,20 @@
 .hero__scroll-line {
   display: block;
   width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.3),
-      rgba(255, 255, 255, 0));
-  animation: scrollPulse 2.4s ease-in-out infinite;
+  height: 36px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.25), transparent);
+  animation: pulse 2.5s ease-in-out infinite;
 }
 
-@keyframes scrollPulse {
+@keyframes pulse {
 
   0%,
   100% {
-    opacity: 0.4;
-    transform: scaleY(1);
+    opacity: 0.3;
   }
 
   50% {
-    opacity: 0.8;
-    transform: scaleY(1.1);
+    opacity: 0.7;
   }
 }
 
@@ -274,58 +342,40 @@
    ======================== */
 
 @media (max-width: 900px) {
-  .hero {
-    padding: 100px 0 80px;
+  .hero__container {
+    padding: 80px 24px 48px;
   }
 
-  .hero__grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    text-align: center;
-    min-height: auto;
-    justify-items: center;
+  .hero__name {
+    font-size: clamp(2.4rem, 10vw, 4rem);
+    letter-spacing: -2px;
   }
 
-  .hero__photo-col {
-    order: -1;
+  .hero__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
   }
 
-  .hero__photo {
-    width: 200px;
-    height: 200px;
+  .hero__info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
   }
 
   .hero__desc {
     max-width: none;
   }
-
-  .hero__actions {
-    justify-content: center;
-  }
-
-  .hero__glow {
-    left: 50%;
-    transform: translateX(-50%);
-  }
 }
 
 @media (max-width: 480px) {
-  .hero {
-    padding: 80px 0 64px;
-  }
-
   .hero__container {
-    padding: 0 20px;
+    padding: 72px 20px 40px;
   }
 
   .hero__name {
     font-size: 2.2rem;
-    letter-spacing: -0.5px;
-  }
-
-  .hero__photo {
-    width: 160px;
-    height: 160px;
+    letter-spacing: -1px;
   }
 
   .hero__actions {
@@ -335,6 +385,10 @@
 
   .hero__btn {
     width: 100%;
+  }
+
+  .hero__scroll {
+    display: none;
   }
 }
 

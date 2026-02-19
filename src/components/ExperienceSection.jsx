@@ -118,7 +118,7 @@ const ExperienceSection = () => {
       "/assets/image/lpk (4).png",
       "/assets/image/lpk (1).png",
       "/assets/image/lpk (2).png",
-      "/assets/image/lpk (3).png",     
+      "/assets/image/lpk (3).png",
       "/assets/image/lpk (5).png",
       "/assets/image/lpk (6).png"
     ]
@@ -277,7 +277,7 @@ const ExperienceSection = () => {
         currentIndex - 1 >= 0 ? currentIndex - 1 : validImages.length - 1,
         currentIndex + 1 < validImages.length ? currentIndex + 1 : 0
       ];
-      
+
       preloadIndexes.forEach(idx => {
         if (!loadedImages.has(idx)) {
           const img = new Image();
@@ -347,9 +347,8 @@ const ExperienceSection = () => {
                 <button
                   key={idx}
                   type="button"
-                  className={`slider-dot ${
-                    idx === currentIndex ? "active" : ""
-                  }`}
+                  className={`slider-dot ${idx === currentIndex ? "active" : ""
+                    }`}
                   onClick={(e) => handleDotClick(idx, e)}
                   aria-label={`Go to image ${idx + 1}`}
                 />
@@ -473,7 +472,6 @@ const ExperienceSection = () => {
                   />
                 </div>
 
-                <div className="card-accent" />
                 <div className="project-meta">
                   <span className="project-role">{project.role}</span>
                   <span className="project-date">{project.date}</span>
