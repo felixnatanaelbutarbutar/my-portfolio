@@ -10,11 +10,10 @@ const EDUCATION = [
     location: "Laguboti, Toba, North Sumatra",
     degree: "Diploma — Information Technology",
     highlights: [
-      { icon: "📚", text: "Focus: Software Development & System Design" },
-      { icon: "🏆", text: "3rd Winner — Coding Day Competition 2025" }
+      "Focus: Software Development & System Design",
+      "3rd Winner — Coding Day Competition 2025"
     ],
-    logo: "/assets/image/logo1.jpg",
-    chips: ["Diploma (D3)", "Active Student"]
+    logo: "/assets/image/logo1.jpg"
   },
   {
     id: "sma",
@@ -23,54 +22,38 @@ const EDUCATION = [
     score: null,
     location: "Balige, Toba, North Sumatra",
     degree: "Science Major",
-    highlights: [{ icon: "🔬", text: "Focus: Mathematics & Natural Sciences" }],
-    logo: "/assets/image/logo2.png",
-    chips: ["High School", "Science Major"]
+    highlights: [
+      "Focus: Mathematics & Natural Sciences"
+    ],
+    logo: "/assets/image/logo2.png"
   }
 ];
 
-const EducationCard = ({ item, index }) => {
+const EducationCard = ({ item }) => {
   return (
-    <article
-      className="education-card reveal"
-      tabIndex={0}
-      aria-labelledby={`${item.id}-title`}
-      style={{ animationDelay: `${index * 120}ms` }}
-    >
-      <div className="card-left">
-        <div className="timeline-marker" aria-hidden>
-          <span className="marker-dot" />
-        </div>
-
-        <div className="school-logo" aria-hidden>
-          <img src={item.logo} alt={`Logo ${item.title}`} />
-        </div>
-
-        <div className="meta">
-          <div className="edu-date">{item.date}</div>
-          {item.score && <div className="edu-score">{item.score}</div>}
-        </div>
+    <article className="edu-card" aria-labelledby={`${item.id}-title`}>
+      <div className="edu-card__logo">
+        <img src={item.logo} alt={item.title} />
       </div>
 
-      <div className="card-right">
-        <h3 id={`${item.id}-title`} className="edu-school">{item.title}</h3>
-        <p className="edu-location">{item.location}</p>
-        <p className="edu-degree">{item.degree}</p>
+      <div className="edu-card__body">
+        <div className="edu-card__header">
+          <div>
+            <h3 id={`${item.id}-title`} className="edu-card__title">{item.title}</h3>
+            <p className="edu-card__degree">{item.degree}</p>
+          </div>
+          <span className="edu-card__date">{item.date}</span>
+        </div>
 
-        <ul className="education-highlights">
-          {item.highlights.map((h, i) => (
-            <li key={i} className="highlight-item">
-              <span className="highlight-badge" aria-hidden>{h.icon}</span>
-              <span className="highlight-text">{h.text}</span>
-            </li>
+        <p className="edu-card__location">{item.location}</p>
+
+        {item.score && <span className="edu-card__score">{item.score}</span>}
+
+        <ul className="edu-card__highlights">
+          {item.highlights.map((text, i) => (
+            <li key={i}>{text}</li>
           ))}
         </ul>
-
-        <div className="card-footer">
-          {item.chips.map((c, idx) => (
-            <span key={idx} className={`chip ${idx === 1 ? "outline" : ""}`}>{c}</span>
-          ))}
-        </div>
       </div>
     </article>
   );
@@ -81,11 +64,9 @@ const EducationSection = () => {
     <section id="education" className="section education-section" aria-labelledby="education-title">
       <div className="education-container">
         <h2 id="education-title" className="section-title">Education</h2>
-
-        <div className="education-grid">
-          <div className="timeline-line" aria-hidden />
-          {EDUCATION.map((item, i) => (
-            <EducationCard item={item} index={i} key={item.id} />
+        <div className="edu-list">
+          {EDUCATION.map((item) => (
+            <EducationCard item={item} key={item.id} />
           ))}
         </div>
       </div>
