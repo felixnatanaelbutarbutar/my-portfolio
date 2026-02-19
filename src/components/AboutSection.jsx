@@ -32,18 +32,12 @@ const AboutSection = () => {
           {/* Right column — body text */}
           <div className="about__body">
             <p>
-              Diploma (D3) Information Technology student at Institut Teknologi Del
-              with hands-on experience as a Part-time Web Developer at PT AOKI MORI
-              INDONESIA. Built and deployed a production-ready company profile and
-              online student registration system with multilingual support (Japanese,
-              English, Indonesian) and responsive UI.
+              Information Technology Graduate from Institut Teknologi Del with a versatile background in Full-stack Development and AI Engineering.
             </p>
             <p>
-              Comfortable working on both frontend and backend to turn business
-              requirements into working features. Currently seeking a Software
-              Engineer Internship where I can contribute to real projects, improve my
-              skills, and learn from experienced engineers — flexible to take on
-              Backend, Frontend, or Fullstack roles.
+              Previously, I served as a Web Developer at PT AOKI MORI INDONESIA, where I deployed production-ready multilingual systems. Most recently, as an AI Engineer Intern at PT Teknologi Cerdas Berdaulat Indonesia, 
+              I contributed to various real-world AI projects, bridging the gap between complex algorithms and functional software.
+              I am passionate about building intelligent, scalable solutions and am currently looking for opportunities to grow as a Software or AI Engineer.
             </p>
           </div>
 
