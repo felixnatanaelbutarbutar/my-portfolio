@@ -1,7 +1,42 @@
+import { useEffect, useState, useRef } from 'react';
 import '../css/Navbar.css' // pastikan path ini sesuai struktur proyekmu
 import navLogo from '/assets/image/logonavbar.png';
 
 const Navbar = ({ activeSection, isMenuOpen, toggleMenu, scrollToSection }) => {
+  const [pillStyle, setPillStyle] = useState({ opacity: 0 });
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    const updatePill = () => {
+      if (navRef.current) {
+        if (window.innerWidth <= 900) {
+          setPillStyle({ opacity: 0 });
+          return;
+        }
+        const activeLink = navRef.current.querySelector(`a:not(.contact-btn)[href="#${activeSection}"]`);
+        if (activeLink) {
+          const { offsetLeft, offsetWidth, offsetTop, offsetHeight } = activeLink;
+          setPillStyle({
+            left: `${offsetLeft}px`,
+            width: `${offsetWidth}px`,
+            top: `${offsetTop}px`,
+            height: `${offsetHeight}px`,
+            opacity: 1
+          });
+        } else {
+          setPillStyle({ opacity: 0 });
+        }
+      }
+    };
+
+    const timer = setTimeout(updatePill, 50);
+    window.addEventListener('resize', updatePill);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updatePill);
+    };
+  }, [activeSection, isMenuOpen]);
+
   return (
     <>
       <nav className="navbar">
@@ -28,7 +63,9 @@ const Navbar = ({ activeSection, isMenuOpen, toggleMenu, scrollToSection }) => {
             <div className="menu-overlay" onClick={toggleMenu}></div>
           )}
 
-          <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
+          <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`} ref={navRef}>
+            {/* Sliding Magnifying Glass Pill */}
+            <li className="nav-pill" style={pillStyle} aria-hidden="true"></li>
             <li>
               <a
                 href="#home"
