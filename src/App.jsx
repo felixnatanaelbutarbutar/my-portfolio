@@ -101,7 +101,6 @@ function App() {
         toggleMenu={toggleMenu}
         scrollToSection={scrollToSection}
       />
-      p
 
       <HeroSection scrollToSection={scrollToSection} />
       <AboutSection />
