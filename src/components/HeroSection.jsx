@@ -72,7 +72,7 @@ const HeroSection = ({ scrollToSection }) => {
 
             <div className="hero__info-block">
               <div className="hero__identity-text">
-                <span className="hero__role">Full Stack Developer</span>
+                <span className="hero__role">Full Stack Developer - AI Engineer</span>
                 <span className="hero__loc">Jakarta Selatan, Indonesia</span>
               </div>
               <p className="hero__desc">

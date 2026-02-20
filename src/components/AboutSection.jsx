@@ -23,8 +23,8 @@ const AboutSection = () => {
           {/* Left column — offset intro */}
           <div className="about__intro">
             <h2 className="about__title">
-              Developer.<br />
-              <span className="about__title--light">Problem Solver.</span><br />
+              Software Dev.<br />
+              <span className="about__title--light">AI Engineer.</span><br />
               <span className="about__title--accent">System Thinker.</span>
             </h2>
           </div>
@@ -35,7 +35,7 @@ const AboutSection = () => {
               Information Technology Graduate from Institut Teknologi Del with a versatile background in Full-stack Development and AI Engineering.
             </p>
             <p>
-              Previously, I served as a Web Developer at PT AOKI MORI INDONESIA, where I deployed production-ready multilingual systems. Most recently, as an AI Engineer Intern at PT Teknologi Cerdas Berdaulat Indonesia, 
+              Previously, I served as a Web Developer at PT AOKI MORI INDONESIA, where I deployed production-ready multilingual systems. Most recently, as an AI Engineer Intern at PT Teknologi Cerdas Berdaulat Indonesia,
               I contributed to various real-world AI projects, bridging the gap between complex algorithms and functional software.
               I am passionate about building intelligent, scalable solutions and am currently looking for opportunities to grow as a Software or AI Engineer.
             </p>
@@ -56,7 +56,7 @@ const AboutSection = () => {
           </div>
           <div className="about__fact-divider" />
           <div className="about__fact">
-            <span className="about__fact-num">1</span>
+            <span className="about__fact-num">2</span>
             <span className="about__fact-label">Work Experience</span>
           </div>
           <div className="about__fact-divider" />
