@@ -24,7 +24,7 @@ const HeroSection = ({ scrollToSection }) => {
             <div className="hero__header">
               <p className="hero__hi">Hi there, I'm</p>
               <h1 className="hero__name">
-                <span className="hero__name-first" data-text="Felix">Felix</span>{' '}
+                <span className="hero__name-first" data-text="Felix">Felix</span>
                 <span className="hero__name-first" data-text="Natanael">Natanael</span>
                 <span className="hero__name-last" data-text="Butarbutar">Butarbutar</span>
               </h1>
