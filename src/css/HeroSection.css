@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 
 /* ========================
    HERO SECTION — editorial layout
@@ -20,11 +21,19 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
+  background: radial-gradient(ellipse at bottom, rgba(185, 139, 34, 0.15) 0%, transparent 60%);
+}
+
+.hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background-image:
-    radial-gradient(ellipse at bottom, rgba(185, 139, 34, 0.15) 0%, transparent 60%),
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 40px 40px, 40px 40px;
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.3) 90%);
+  mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.3) 90%);
 }
 
 .hero__bg-grain {
@@ -104,63 +113,85 @@
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Subtle scale settle — name "lands" after typing finishes */
-.hero__name--settled {
-  transform: scale(1);
+@keyframes heroNameBlur {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+    transform: scale(1.05) translateY(10px);
+  }
+
+  100% {
+    filter: blur(0);
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .hero__name-first {
   display: inline-block;
   position: relative;
-  transition: color 0.4s ease-in-out;
+  opacity: 0;
+  transition: color 0.4s ease, transform 0.4s ease;
 }
 
-/* Hover underline — thin line slides in from left */
-.hero__name-first::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(167, 139, 250, 0.6), rgba(139, 92, 246, 0.2));
-  border-radius: 1px;
-  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.hero__name:hover .hero__name-first::after {
-  width: 100%;
-}
-
-.hero__name:hover .hero__name-first {
-  color: rgba(199, 183, 255, 0.95);
+.hero--visible .hero__name-first {
+  animation: heroNameBlur 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
 }
 
 .hero__name-last {
   display: block;
+  position: relative;
+  opacity: 0;
   color: rgba(255, 255, 255, 0.35);
-  transition: color 0.4s ease-in-out;
+  transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.hero--visible .hero__name-last {
+  animation: heroNameBlur 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+}
+
+/* Pseudo-elements for smooth font change via overlay */
+.hero__name-first::before,
+.hero__name-last::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateY(10px) scale(0.98);
+}
+
+.hero__name-first::before {
+  color: #ffdf73;
+  /* Elegant Gold */
+}
+
+.hero__name-last::before {
+  color: #fff;
+  /* Crisp White */
+}
+
+/* Hover Effect: Hide original, reveal pseudo */
+.hero__name:hover .hero__name-first {
+  color: transparent;
+  transform: translateY(-2px);
 }
 
 .hero__name:hover .hero__name-last {
-  color: rgba(255, 255, 255, 0.55);
+  color: transparent;
+  transform: translateY(-2px);
 }
 
-/* Cursor */
-.hero__cursor {
-  display: inline-block;
-  width: 3px;
-  height: 0.75em;
-  background: rgba(167, 139, 250, 0.6);
-  margin-left: 6px;
-  vertical-align: text-bottom;
-  animation: blink 1s ease-in-out infinite;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
+.hero__name:hover .hero__name-first::before,
+.hero__name:hover .hero__name-last::before {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 /* ========================

@@ -3,12 +3,29 @@
    ======================== */
 
 .skills-section {
+  position: relative;
   padding: 96px 0;
   background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1428 100%);
   color: #fff;
+  overflow: hidden;
+}
+
+.skills-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse at bottom, rgba(185, 139, 34, 0.15) 0%, transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  z-index: 0;
 }
 
 .skills-container {
+  position: relative;
+  z-index: 1;
   max-width: 960px;
   margin: 0 auto;
   padding: 0 24px;
