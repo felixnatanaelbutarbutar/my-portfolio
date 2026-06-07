@@ -25,7 +25,8 @@ import {
   SiFirebase,
   SiPhp,
   SiTailwindcss,
-  SiFigma
+  SiFigma,
+  SiGo
 } from "react-icons/si";
 
 const ExperienceSection = () => {
@@ -90,39 +91,60 @@ const ExperienceSection = () => {
       "tailwind": SiTailwindcss,
       "cobit": FiTool,
       "itil": FiTool,
-      "iso 38500": FiTool
+      "iso 38500": FiTool,
+      "golang": SiGo,
+      "go": SiGo
     };
 
     const key = techName.toLowerCase().trim();
     return iconMap[key] || FiCode;
   };
 
-  const workExperience = {
-    badge: "Professional",
-    role: "Part-time Web Developer",
-    date: "Aug 2025 – Dec 2025",
-    title: "PT AOKI MORI INDONESIA",
-    // company: "North Sumatra",
-    address: "Siborongborong, North Sumatra",
-    description: "Multilingual company profile with integrated student registration system",
-    highlights: [
-      "Developed company profile website with online student registration platform",
-      "Implemented multilingual support (Japanese, English, Indonesian) with dynamic switching",
-      "Designed responsive UI layouts aligned with company branding",
-      "Collaborated with internal team to deliver production-ready features"
-    ],
-    tech: ["Laravel", "Vue.js", "MySQL", "i18n"],
-    githubUrl: "https://github.com/felixnatanaelbutarbutar/lpk-site.git",
-    websiteUrl: "https://lpkmoricentre.co.id",
-    images: [
-      "/assets/image/lpk (4).png",
-      "/assets/image/lpk (1).png",
-      "/assets/image/lpk (2).png",
-      "/assets/image/lpk (3).png",
-      "/assets/image/lpk (5).png",
-      "/assets/image/lpk (6).png"
-    ]
-  };
+  const workExperiences = [
+    {
+      badge: "Latest",
+      role: "AI Engineer",
+      date: "Feb 2026 – Aug 2026",
+      title: "INaAI - PT Teknologi Cerdas Berdaulat Indonesia",
+      address: "Central Jakarta, DKI Jakarta",
+      description: "6-month AI internship contributing to multiple real-world machine learning and data science projects for enterprise clients.",
+      highlights: [
+        "Actively contributed to multiple real-world AI projects over a 6-month internship",
+        "Developed, trained, and evaluated AI models for various applications ensuring optimal performance",
+        "Collaborated with engineering team to process datasets, refine algorithms, and integrate AI features",
+        "Built and deployed an end-to-end AI/ML solution for PT Mayora Indah Tbk.",
+        "Built and deployed an AI/ML solution for PT Prima Abadi Distribusi."
+      ],
+      tech: ["Python", "TensorFlow", "PyTorch", "FastAPI"],
+      images: []
+    },
+    {
+      badge: "Professional",
+      role: "Web Developer",
+      date: "Aug 2025 – May 2026",
+      title: "PT AOKI MORI INDONESIA",
+      address: "Siborongborong, North Sumatera",
+      description: "Developed a company profile website with integrated information system, e-learning platform, and online student registration.",
+      highlights: [
+        "Developed company profile website with online student registration platform",
+        "Architected and built an e-learning platform with assignment submissions and online examination system",
+        "Engineered backend with Golang for high performance, paired with responsive Next.js frontend",
+        "Implemented multilingual website (Japanese, English, Indonesian) with dynamic language switching",
+        "Designed responsive UI layouts aligned with company branding"
+      ],
+      tech: ["Next.js", "MySQL", "i18n"],
+      // githubUrl: "https://github.com/felixnatanaelbutarbutar/lpk-site.git",
+      websiteUrl: "https://lpkmoricentre.co.id",
+      // images: [
+      //   "/assets/image/lpk (4).png",
+      //   "/assets/image/lpk (1).png",
+      //   "/assets/image/lpk (2).png",
+      //   "/assets/image/lpk (3).png",
+      //   "/assets/image/lpk (5).png",
+      //   "/assets/image/lpk (6).png"
+      // ]
+    }
+  ];
 
   const projects = [
     {
@@ -372,85 +394,90 @@ const ExperienceSection = () => {
             <div className="category-line" />
           </div>
 
-          <article
-            className="work-card featured-work"
-            aria-labelledby="featured-title"
-          >
-            <div className="work-badge">{workExperience.badge}</div>
+          {workExperiences.map((we, index) => (
+            <article
+              key={index}
+              className="work-card featured-work"
+              aria-labelledby={`work-title-${index}`}
+            >
+              <div className="work-badge">{we.badge}</div>
 
-            {/* Image Slider untuk Work Experience */}
-            <div className="featured-image-wrapper">
-              <ImageSlider
-                images={workExperience.images}
-                onImageClick={openImage}
-                isLarge={true}
-              />
-            </div>
+              {/* Image Slider untuk Work Experience */}
+              {we.images && we.images.length > 0 && (
+                <div className="featured-image-wrapper">
+                  <ImageSlider
+                    images={we.images}
+                    onImageClick={openImage}
+                    isLarge={true}
+                  />
+                </div>
+              )}
 
-            <div className="work-header">
-              <div className="work-meta" aria-hidden={false}>
-                <span className="badge-brand badge-orange work-role">
-                  {workExperience.role}
-                </span>
-                <span className="badge-brand badge-teal work-date">
-                  {workExperience.date}
-                </span>
+              <div className="work-header">
+                <div className="work-meta" aria-hidden={false}>
+                  <span className="badge-brand badge-orange work-role">
+                    {we.role}
+                  </span>
+                  <span className="badge-brand badge-teal work-date">
+                    {we.date}
+                  </span>
+                </div>
+
+                <h3 id={`work-title-${index}`} className="work-title">
+                  {we.title}
+                </h3>
+                <p className="work-company-address">
+                  {we.address}
+                </p>
+                <p className="work-description">
+                  {we.description}
+                </p>
               </div>
 
-              <h3 id="featured-title" className="work-title">
-                {workExperience.title}
-              </h3>
-              <p className="work-company-address">
-                {workExperience.company} • {workExperience.address}
-              </p>
-              <p className="work-description">
-                {workExperience.description}
-              </p>
-            </div>
+              <ul className="work-highlights">
+                {we.highlights.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
 
-            <ul className="work-highlights">
-              {workExperience.highlights.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
+              <div className="work-tech">
+                {we.tech.map((tech, i) => {
+                  const IconComponent = getTechIcon(tech);
+                  return (
+                    <span key={i} className="tech-tag">
+                      <IconComponent className="tech-icon" />
+                      <span> {tech}</span>
+                    </span>
+                  );
+                })}
+              </div>
 
-            <div className="work-tech">
-              {workExperience.tech.map((tech, i) => {
-                const IconComponent = getTechIcon(tech);
-                return (
-                  <span key={i} className="tech-tag">
-                    <IconComponent className="tech-icon" />
-                    <span> {tech}</span>
-                  </span>
-                );
-              })}
-            </div>
-
-            <div className="project-links">
-              {workExperience.websiteUrl && (
-                <a
-                  href={workExperience.websiteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="website-link"
-                >
-                  <FiExternalLink />
-                  <span>Visit Website</span>
-                </a>
-              )}
-              {workExperience.githubUrl && (
-                <a
-                  href={workExperience.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="github-link"
-                >
-                  <FiGithub />
-                  <span>View on GitHub</span>
-                </a>
-              )}
-            </div>
-          </article>
+              <div className="project-links">
+                {we.websiteUrl && (
+                  <a
+                    href={we.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="website-link"
+                  >
+                    <FiExternalLink />
+                    <span>Visit Website</span>
+                  </a>
+                )}
+                {we.githubUrl && (
+                  <a
+                    href={we.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="github-link"
+                  >
+                    <FiGithub />
+                    <span>View on GitHub</span>
+                  </a>
+                )}
+              </div>
+            </article>
+          ))}
         </div>
 
         {/* PROJECTS */}
