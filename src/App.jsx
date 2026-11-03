@@ -1,121 +1,87 @@
-import { useState, useEffect, useRef } from 'react'
-
-// Import components
+import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import HeroSection from './components/HeroSection'
 import AboutSection from './components/AboutSection'
 import SkillsSection from './components/SkillsSection'
 import ExperienceSection from './components/ExperienceSection'
-// import GallerySection from './components/GallerySection'
-// import ProjectsSection from './components/ProjectsSection'
 import EducationSection from './components/EducationSection'
-// import OrganizationSection from './components/OrganizationSection'
-// import HighlightsSection from './components/HighlightsSection'
+import AchievementSection from './components/AchievementSection'
 import ContactSection from './components/ContactSection'
 import CertificateSection from './components/CertificateSection'
-// import QuoteSection from './components/QuoteSection'
 import Footer from './components/Footer'
+
+const SECTION_IDS = ['home', 'about', 'projects', 'experience', 'skills', 'credentials', 'contact']
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const observerRef = useRef(null)
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'skills', 'experience', 'gallery', 'projects', 'education', 'organization', 'highlights', 'certificates', 'contact']
-      const scrollPosition = window.scrollY + 100
+    const updateActiveSection = () => {
+      const marker = window.innerHeight * 0.34
+      let current = 'home'
 
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section)
-            break
-          }
-        }
+      for (const id of SECTION_IDS) {
+        const section = document.getElementById(id)
+        if (section && section.getBoundingClientRect().top <= marker) current = id
       }
+
+      setActiveSection(current)
     }
 
-    // Intersection Observer untuk animasi scroll
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in')
-          }
-        })
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-      }
-    )
+    updateActiveSection()
+    window.addEventListener('scroll', updateActiveSection, { passive: true })
+    window.addEventListener('resize', updateActiveSection)
 
-    // Observe semua elemen yang perlu di-animate
-    const elementsToObserve = document.querySelectorAll('.fade-in, .slide-up, .skill-card, .project-card, .gallery-item')
-    elementsToObserve.forEach((el) => observerRef.current.observe(el))
-
-    window.addEventListener('scroll', handleScroll)
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-      if (observerRef.current) {
-        observerRef.current.disconnect()
-      }
+      window.removeEventListener('scroll', updateActiveSection)
+      window.removeEventListener('resize', updateActiveSection)
     }
   }, [])
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
+    const previousOverflow = document.body.style.overflow
+    if (isMenuOpen) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = previousOverflow
+
     return () => {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = previousOverflow
     }
   }, [isMenuOpen])
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      setIsMenuOpen(false)
-    }
-  }
+    const section = document.getElementById(sectionId)
+    if (!section) return
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    section.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' })
+    setIsMenuOpen(false)
   }
 
   return (
     <div className="app">
-      {/* Custom Cursor */}
-      <div className="custom-cursor"></div>
-
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <Navbar
         activeSection={activeSection}
         isMenuOpen={isMenuOpen}
-        toggleMenu={toggleMenu}
+        setIsMenuOpen={setIsMenuOpen}
         scrollToSection={scrollToSection}
       />
 
-      <HeroSection scrollToSection={scrollToSection} />
-      <AboutSection />
-      <SkillsSection />
-      <ExperienceSection />
-      {/* <ProjectsSection /> */}
-      <EducationSection />
-      {/* <OrganizationSection />
-      <HighlightsSection /> */}
-      <ContactSection />
-      <CertificateSection />
-      {/* <QuoteSection /> */}
+      <main id="main-content">
+        <HeroSection scrollToSection={scrollToSection} />
+        <AboutSection />
+        <ExperienceSection />
+        <SkillsSection />
+        <div id="credentials" className="credentials">
+          <EducationSection />
+          <AchievementSection />
+          <CertificateSection />
+        </div>
+        <ContactSection />
+      </main>
+
       <Footer />
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8196421968741590"
-        crossorigin="anonymous"></script>
     </div>
   )
 }

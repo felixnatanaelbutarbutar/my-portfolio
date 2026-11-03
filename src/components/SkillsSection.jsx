@@ -1,116 +1,56 @@
-import React from "react";
-import "../css/SkillsSection.css";
-import {
-  SiC,
-  SiPhp,
-  SiPython,
-  SiGo,
-  SiJavascript,
-  SiTypescript,
-  SiDart,
-  SiLaravel,
-  SiFastapi,
-  SiReact,
-  SiFlutter,
-  SiFlask,
-  SiNodedotjs,
-  SiNextdotjs,
-  SiStreamlit,
-  SiSelenium,
-  SiGithub,
-  SiMysql,
-  SiPostgresql,
-  SiMongodb,
-  SiAmazon,
-  SiGooglecloud,
-  SiGit,
-  SiFigma,
-  SiTrello
-} from "react-icons/si";
-import { TbTestPipe, TbCloud } from "react-icons/tb";
-import { FiTool, FiCode } from "react-icons/fi";
+import '../css/SkillsSection.css'
 
-const SKILLS_DATA = [
+const SKILL_GROUPS = [
   {
-    id: "programming",
-    title: "Programming Languages",
-    tags: ["C", "C#", "PHP", "Java", "Python", "Golang", "Javascript", "TypeScript", "Dart"]
+    label: 'Engineering',
+    items: ['Python', 'Go', 'C# / .NET', 'JavaScript', 'TypeScript', 'PHP', 'Dart', 'Java', 'C'],
   },
   {
-    id: "frameworks",
-    title: "Frameworks & Libraries",
-    tags: ["Laravel", "FastAPI", "React.js", "Flutter", "Flask", "Node.js", "Next.js", "Streamlit"]
+    label: 'Applied AI',
+    items: ['Machine learning', 'Deep learning', 'NLP', 'Computer vision', 'ASR', 'LLM evaluation', 'RAG', 'Model deployment', 'Whisper', 'DeBERTa', 'XGBoost'],
   },
   {
-    id: "testing",
-    title: "Testing Tools",
-    tags: ["Manual Testing", "Selenium", "Katalon"]
+    label: 'Product & platforms',
+    items: ['Microsoft Dynamics 365', 'CRM systems', '.NET', 'n8n', 'React', 'Next.js', 'FastAPI', 'Flask', 'Laravel', 'Flutter', 'Streamlit', 'Node.js'],
   },
   {
-    id: "database",
-    title: "Database Management",
-    tags: ["MySQL", "PostgreSQL", "MongoDB"]
+    label: 'Data & infrastructure',
+    items: ['Microsoft SQL Server (MSSQL)', 'PostgreSQL', 'MySQL', 'Redis', 'Qdrant', 'MongoDB', 'Firebase', 'Docker', 'AWS', 'Google Cloud'],
   },
   {
-    id: "cloud",
-    title: "Cloud Services",
-    tags: ["Amazon Web Services", "Google Cloud"]
+    label: 'Libraries & tools',
+    items: ['PyTorch', 'TensorFlow', 'Keras', 'Hugging Face Transformers', 'CVAT', 'Google Colab', 'Git', 'Figma', 'REST APIs'],
   },
   {
-    id: "others",
-    title: "Others",
-    tags: [
-      "Git", "GitHub", "Trello", "SDLC", "BPMN", "Bizagi",
-      "Figma", "Balsamic", "CRISP-DM", "Business Model Canvas",
-      "Market Analysis", "Stakeholder Analysis",
-      "Creative Thinking", "Entrepreneurial Thinking"
-    ]
-  }
-];
-
-const ICON_MAP = {
-  c: SiC, "c#": FiCode, php: SiPhp, java: FiCode,
-  python: SiPython, golang: SiGo, javascript: SiJavascript,
-  typescript: SiTypescript, dart: SiDart, laravel: SiLaravel,
-  fastapi: SiFastapi, "react.js": SiReact, flutter: SiFlutter,
-  flask: SiFlask, "node.js": SiNodedotjs, "next.js": SiNextdotjs,
-  streamlit: SiStreamlit, selenium: SiSelenium, github: SiGithub,
-  git: SiGit, mysql: SiMysql, postgresql: SiPostgresql,
-  mongodb: SiMongodb, "amazon web services": SiAmazon,
-  "google cloud": SiGooglecloud, figma: SiFigma, trello: SiTrello,
-  "manual testing": TbTestPipe, katalon: TbTestPipe,
-};
-
-function getIcon(name) {
-  const key = name.toLowerCase().trim();
-  return ICON_MAP[key] || null;
-}
+    label: 'Methods & systems',
+    items: ['SDLC', 'BPMN', 'CRISP-DM', 'ITIL', 'COBIT', 'ISO 38500', 'Business Model Canvas', 'Market analysis', 'Agentic AI', 'Claude Code', 'OpenAI Codex', 'OpenCode'],
+  },
+]
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="skills-section" aria-label="Skills">
-      <div className="skills-container">
-        <h2 className="skills-heading">Skills</h2>
-
-        <div className="skills-grid">
-          {SKILLS_DATA.map((group) => (
-            <div key={group.id} className="skills-group">
-              <h3 className="skills-group__title">{group.title}</h3>
-              <div className="skills-group__tags">
-                {group.tags.map((name) => {
-                  const Icon = getIcon(name);
-                  return (
-                    <span key={name} className="skill-chip">
-                      {Icon && <Icon className="skill-chip__icon" aria-hidden="true" />}
-                      {name}
-                    </span>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+    <section id="skills" className="skills section-wrap" aria-labelledby="skills-heading">
+      <div className="skills__heading-row">
+        <div>
+          <span className="section-label">Capabilities</span>
+          <h2 id="skills-heading" className="section-heading">Tools for the work.</h2>
         </div>
+        <p className="skills__intro">
+          A practical toolkit across software engineering, data systems, and applied machine learning.
+        </p>
+      </div>
+
+      <div className="skills__grid">
+        {SKILL_GROUPS.map((group, index) => (
+          <section className="skills__group" key={group.label} aria-labelledby={'skill-group-' + index}>
+            <h3 id={'skill-group-' + index}>
+              <span>0{index + 1}</span>
+              {group.label}
+            </h3>
+            <p>{group.items.join(' · ')}</p>
+          </section>
+        ))}
       </div>
     </section>
-  );
+  )
 }

@@ -1,575 +1,381 @@
-import React, { useState, useEffect } from "react";
-import "../css/ExperienceSection.css";
-import {
-  FiGithub,
-  FiExternalLink,
-  FiCode,
-  FiTool,
-  FiChevronLeft,
-  FiChevronRight
-} from "react-icons/fi";
-import {
-  SiLaravel,
-  SiVuedotjs,
-  SiMysql,
-  SiPython,
-  SiFastapi,
-  SiNextdotjs,
-  SiPytorch,
-  SiReact,
-  SiPostgresql,
-  SiStreamlit,
-  SiTensorflow,
-  SiFlutter,
-  SiDart,
-  SiFirebase,
-  SiPhp,
-  SiTailwindcss,
-  SiFigma,
-  SiGo
-} from "react-icons/si";
+import { useEffect, useRef, useState } from 'react'
+import { FiArrowLeft, FiArrowRight, FiArrowUpRight, FiX } from 'react-icons/fi'
+import '../css/ExperienceSection.css'
 
-const ExperienceSection = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [modalImage, setModalImage] = useState(null);
+const FEATURED_PROJECTS = [
+  {
+    id: 'ruangrpp',
+    number: '01',
+    title: 'RuangRPP',
+    subtitle: 'AI-assisted lesson planning',
+    role: 'Full-Stack Developer',
+    date: 'August 2026',
+    description: 'A curriculum knowledge platform that helps educators build citation-backed lesson plans from institutional learning materials.',
+    highlights: [
+      'Built a Next.js and FastAPI application backed by PostgreSQL 17 and Docker Compose.',
+      'Created secure PDF/DOCX ingestion with anti-malware safeguards, extracting structured content from documents over 200 pages.',
+      'Implemented Argon2id sessions, role-based access, request throttling, and rule-based curriculum validation for RAG-supported planning.',
+    ],
+    tech: ['Next.js', 'React 19', 'TypeScript', 'FastAPI', 'PostgreSQL 17', 'SQLAlchemy', 'Docker Compose', 'Pytest', 'RAG / LLM'],
+  },
+  {
+    id: 'glitchrun',
+    number: '02',
+    title: 'GlitchRun',
+    subtitle: 'Real-time multiplayer game platform',
+    role: 'Software Engineer',
+    date: 'May 2026',
+    description: 'A real-time crash game built around concurrent multiplayer rounds and verifiable outcomes.',
+    highlights: [
+      'Designed a Go game engine with goroutines, channels, and a synchronized WebSocket hub serving sub-100ms game-loop updates.',
+      'Implemented a provably fair outcome protocol with HMAC-SHA256 and SHA-256 pre-commitments.',
+      'Built atomic cashout validation with Redis Lua scripts and a four-tier Go, Next.js, Redis, and PostgreSQL deployment.',
+    ],
+    tech: ['Go', 'Next.js', 'TypeScript', 'WebSockets', 'Redis Lua', 'PostgreSQL', 'Docker', 'Zustand', 'Tailwind CSS'],
+  },
+]
 
-  const openImage = (imgSrc) => {
-    if (!imgSrc) return;
-    setModalImage(imgSrc);
-    setIsOpen(true);
-  };
+const PROJECTS = [
+  {
+    id: 'ielts',
+    title: 'IELTS Speaking Evaluation System',
+    role: 'Machine Learning Engineer',
+    date: 'Aug 2025 — Feb 2026',
+    description: 'A web-based speaking evaluation system using Whisper for speech recognition and DeBERTa v3-Base to assess semantic coherence. The earlier portfolio also documents T5-based grammar correction.',
+    tech: ['Python', 'PyTorch', 'Hugging Face Transformers', 'Whisper', 'DeBERTa v3', 'T5', 'FastAPI', 'Next.js', 'Google Colab'],
+    images: ['/assets/image/ielts.png'],
+  },
+  {
+    id: 'stress',
+    title: 'Student Stress Level Prediction',
+    role: 'Machine Learning Engineer',
+    date: 'Aug — Dec 2025',
+    description: 'Classifies questionnaire responses into Distress, Eustress, and No Stress using a 1D-CNN and XGBoost ensemble, with an interactive Streamlit application.',
+    tech: ['Python', 'TensorFlow', 'Keras', 'XGBoost', 'SMOTE', 'Pandas', 'NumPy', 'Streamlit', 'Flask'],
+    images: ['/assets/image/certan.png'],
+  },
+  {
+    id: 'itdel-sis',
+    title: 'IT Del Student Information System',
+    role: 'Full-Stack Developer',
+    date: 'Jan — Jul 2025',
+    description: 'Academic information system with 24 functional features and role-based access across four system roles.',
+    tech: ['Laravel', 'Inertia.js', 'React', 'PostgreSQL'],
+    images: ['/assets/image/sik1.png', '/assets/image/sik2.png', '/assets/image/sik3.png'],
+    githubUrl: 'https://github.com/felixnatanaelbutarbutar/PA-II-07-Sistem-Informasi-Kemahasiswaan-IT-DEL',
+  },
+  {
+    id: 'delcheckin',
+    title: 'DelCheckIn — Digital Attendance',
+    role: 'Mobile Developer',
+    date: 'Aug — Dec 2024',
+    description: 'A digital attendance app for students and staff. The original portfolio reports 500+ users and 80% faster processing than manual sign-in.',
+    tech: ['Flutter', 'Dart', 'Firebase'],
+    images: ['/assets/image/pam.png'],
+    githubUrl: 'https://github.com/felixnatanaelbutarbutar/FLUTTER-ATTENDANCE-APP-USING-FIREBASE',
+  },
+  {
+    id: 'cinema',
+    title: 'Cinema Ticketing System',
+    role: 'Backend & Frontend Developer',
+    date: 'Jan — May 2024',
+    description: 'Desktop cinema management software with dynamic seat selection, payment handling, and an administration module.',
+    tech: ['Java', 'Java Swing', 'PostgreSQL', 'JDBC'],
+    images: ['/assets/image/pbo.png'],
+    githubUrl: 'https://github.com/felixnatanaelbutarbutar/OOP-JAVA-APLIKASI-TIKET-BIOSKOP-',
+  },
+  {
+    id: 'hkbp',
+    title: 'HKBP Church Information System',
+    role: 'Web Developer',
+    date: 'Jan — May 2024',
+    description: 'A church management system for member records, finance, announcements, and administration. The original portfolio reports support for 300+ members.',
+    tech: ['Laravel', 'PHP', 'MySQL', 'Tailwind CSS'],
+    images: ['/assets/image/pa1.png'],
+    githubUrl: 'https://github.com/felixnatanaelbutarbutar/SISTEM-INFORMASI-HKBP_PEANAJAGAR',
+  },
+  {
+    id: 'toba-essence',
+    title: 'Toba Essence: Heritage You Can Taste',
+    role: 'Business Strategist',
+    date: 'Oct — Dec 2025',
+    description: 'A cultural tourism service concept around Lake Toba, developed through market research, a Business Model Canvas, and a Figma prototype.',
+    tech: ['Figma', 'Business Model Canvas', 'Market Analysis'],
+    images: ['/assets/image/tekno.png'],
+  },
+  {
+    id: 'capacity-governance',
+    title: 'System Capacity Governance',
+    role: 'IT Governance',
+    date: 'Dec 2025',
+    description: 'Capacity management framework and As-Is/To-Be process design for a public-service system facing peak-load failures.',
+    tech: ['COBIT', 'ITIL', 'ISO 38500'],
+    images: ['/assets/image/tkti.png'],
+  },
+]
 
-  const closeImage = () => {
-    setIsOpen(false);
-    setModalImage(null);
-  };
+const WORK = [
+  {
+    id: 'bintang',
+    role: 'Software Engineer',
+    company: 'PT Bintang Aplikasi Perkasa',
+    date: 'Aug 2026 — Present',
+    location: 'South Jakarta, Indonesia',
+    current: true,
+    highlights: [
+      'Develops enterprise CRM solutions using Microsoft Dynamics 365 and .NET (C#), including custom plugins and backend services.',
+      'Designs and optimizes MSSQL schemas, complex queries, and stored procedures for business transactions.',
+      'Builds n8n workflows and AI pipelines using Whisper and LLMs for interaction summaries and CRM ticket processing.',
+    ],
+    tech: ['Dynamics 365', '.NET / C#', 'MSSQL', 'n8n', 'Whisper', 'LLMs'],
+  },
+  {
+    id: 'inaai',
+    role: 'AI Engineer Intern',
+    company: 'PT Teknologi Cerdas Berdaulat Indonesia (INaAI)',
+    date: 'Feb 2026 — Aug 2026',
+    location: 'Central Jakarta, Indonesia',
+    current: false,
+    highlights: [
+      'Contributed to five enterprise AI projects for Mayora, Prima Abadi Distribusi, BPJS Ketenagakerjaan, and Polda Jakarta.',
+      'Prepared retail computer-vision datasets and calibrated homographies across 58 CCTV cameras for Mayora shopper analytics.',
+      'Designed adversarial, prompt-injection, and hallucination evaluations for a BPJS health-triage chatbot.',
+      'Sourced multi-domain data and ran exploratory analysis for cocoa-price prediction.',
+    ],
+    tech: ['Python', 'Computer Vision', 'LLM Evaluation', 'CVAT', 'Data Analysis'],
+  },
+  {
+    id: 'aoki-mori',
+    role: 'Full-Stack Developer',
+    company: 'PT Aoki Mori Indonesia',
+    date: 'Apr 2025 — Dec 2025',
+    location: 'Siborongborong, North Sumatra',
+    current: false,
+    highlights: [
+      'Built an academic management platform with Go (Gin), GORM, JWT, and Next.js / TypeScript, covering 30+ REST API endpoints.',
+      'Developed an e-learning system with assignment submissions and auto-graded online examinations.',
+      'Connected company profile and student registration systems with Japanese, English, and Indonesian language support.',
+      'Containerized services with Docker Compose and delivered responsive interfaces aligned to the institution brand.',
+    ],
+    tech: ['Go', 'Next.js', 'TypeScript', 'MySQL', 'Docker', 'i18n'],
+    websiteUrl: 'https://lpkmoricentre.co.id',
+  },
+]
 
-  useEffect(() => {
-    const onKey = (e) => {
-      if (!isOpen) return;
-      if (e.key === "Escape") closeImage();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [isOpen]);
+function ProjectImage({ project, onOpen }) {
+  const [index, setIndex] = useState(0)
 
-  // Icon mapping untuk tech stack
-  const getTechIcon = (techName) => {
-    const iconMap = {
-      "laravel": SiLaravel,
-      "vue.js": SiVuedotjs,
-      "vue": SiVuedotjs,
-      "mysql": SiMysql,
-      "i18n": FiTool,
-      "python": SiPython,
-      "fastapi": SiFastapi,
-      "next.js": SiNextdotjs,
-      "nextjs": SiNextdotjs,
-      "whisper": FiCode,
-      "pytorch": SiPytorch,
-      "inertia.js": SiReact,
-      "inertia": SiReact,
-      "react": SiReact,
-      "postgresql": SiPostgresql,
-      "postgres": SiPostgresql,
-      "streamlit": SiStreamlit,
-      "xgboost": FiCode,
-      "tensorflow": SiTensorflow,
-      "flutter": SiFlutter,
-      "dart": SiDart,
-      "firebase": SiFirebase,
-      "firestore": SiFirebase,
-      "java": FiCode,
-      "java swing": FiCode,
-      "jdbc": FiCode,
-      "figma": SiFigma,
-      "bmc": FiTool,
-      "market analysis": FiTool,
-      "strategy": FiTool,
-      "php": SiPhp,
-      "tailwind css": SiTailwindcss,
-      "tailwind": SiTailwindcss,
-      "cobit": FiTool,
-      "itil": FiTool,
-      "iso 38500": FiTool,
-      "golang": SiGo,
-      "go": SiGo
-    };
+  if (!project.images?.length) return null
 
-    const key = techName.toLowerCase().trim();
-    return iconMap[key] || FiCode;
-  };
-
-  const workExperiences = [
-    {
-      badge: "Latest",
-      role: "AI Engineer",
-      date: "Feb 2026 – Aug 2026",
-      title: "INaAI - PT Teknologi Cerdas Berdaulat Indonesia",
-      address: "Central Jakarta, DKI Jakarta",
-      description: "6-month AI internship contributing to multiple real-world machine learning and data science projects for enterprise clients.",
-      highlights: [
-        "Actively contributed to multiple real-world AI projects over a 6-month internship",
-        "Developed, trained, and evaluated AI models for various applications ensuring optimal performance",
-        "Collaborated with engineering team to process datasets, refine algorithms, and integrate AI features",
-        "Built and deployed an end-to-end AI/ML solution for PT Mayora Indah Tbk.",
-        "Built and deployed an AI/ML solution for PT Prima Abadi Distribusi."
-      ],
-      tech: ["Python", "TensorFlow", "PyTorch", "FastAPI"],
-      images: []
-    },
-    {
-      badge: "Professional",
-      role: "Web Developer",
-      date: "Aug 2025 – May 2026",
-      title: "PT AOKI MORI INDONESIA",
-      address: "Siborongborong, North Sumatera",
-      description: "Developed a company profile website with integrated information system, e-learning platform, and online student registration.",
-      highlights: [
-        "Developed company profile website with online student registration platform",
-        "Architected and built an e-learning platform with assignment submissions and online examination system",
-        "Engineered backend with Golang for high performance, paired with responsive Next.js frontend",
-        "Implemented multilingual website (Japanese, English, Indonesian) with dynamic language switching",
-        "Designed responsive UI layouts aligned with company branding"
-      ],
-      tech: ["Next.js", "MySQL", "i18n"],
-      // githubUrl: "https://github.com/felixnatanaelbutarbutar/lpk-site.git",
-      websiteUrl: "https://lpkmoricentre.co.id",
-      // images: [
-      //   "/assets/image/lpk (4).png",
-      //   "/assets/image/lpk (1).png",
-      //   "/assets/image/lpk (2).png",
-      //   "/assets/image/lpk (3).png",
-      //   "/assets/image/lpk (5).png",
-      //   "/assets/image/lpk (6).png"
-      // ]
-    }
-  ];
-
-  const projects = [
-    {
-      role: "Machine Learning Engineer",
-      date: "Aug 2024 – Jan 2025",
-      title: "IELTS Speaking Evaluation System",
-      company: "Web-Based NLP Application",
-      description:
-        "Automated evaluation system integrating Whisper, T5-Base, and DeBERTa v3-Base for grammar and coherence analysis",
-      highlights: [
-        "Integrated Whisper for speech-to-text, T5-Base for grammar correction",
-        "DeBERTa v3-Base for semantic coherence evaluation",
-        "Deployed with FastAPI backend and Next.js frontend"
-      ],
-      tech: ["Python", "FastAPI", "Next.js", "Whisper", "PyTorch"],
-      images: ["/assets/image/ielts.png"]
-    },
-    {
-      role: "Full Stack Developer",
-      date: "Jan 2025 – Jul 2025",
-      title: "IT Del Student Information System",
-      company: "Institut Teknologi Del",
-      description:
-        "Comprehensive campus information system with 24 features and 4 role-based access levels",
-      highlights: [
-        "Full-stack architecture using Laravel and Inertia.js with React",
-        "Secure PostgreSQL database schema for 25  functional features",
-        "Implemented RBAC for 4 system roles"
-      ],
-      tech: ["Laravel", "Inertia.js", "React", "PostgreSQL", "Typescript"],
-      images: [
-        "/assets/image/sik1.png",
-        "/assets/image/sik2.png",
-        "/assets/image/sik3.png",
-        "/assets/image/pa2schema.png"
-      ],
-      githubUrl:
-        "https://github.com/felixnatanaelbutarbutar/PA-II-07-Sistem-Informasi-Kemahasiswaan-IT-DEL.git"
-    },
-    {
-      role: "ML Engineer & Full-Stack Developer",
-      date: "Aug 2025 – Dec 2025",
-      title: "Student Stress Level Prediction",
-      company: "Machine Learning Project",
-      description:
-        "Ensemble ML model using 1D-CNN and XGBoost to predict student stress levels",
-      highlights: [
-        "Data preprocessing, feature engineering, and SMOTE balancing",
-        "2-Block 1D-CNN model for embedding extraction",
-        "Deployed interactive Streamlit web application"
-      ],
-      tech: ["Python", "Streamlit", "XGBoost", "TensorFlow"],
-      images: ["/assets/image/certan.png"]
-    },
-    {
-      role: "Mobile Application Developer",
-      date: "Aug 2024 – Dec 2024",
-      title: "DelCheckIn – Digital Attendance",
-      company: "Institut Teknologi Del",
-      description:
-        "Mobile app to digitize attendance process for 500+ students and staff",
-      highlights: [
-        "Complete mobile attendance system for 500+ users",
-        "Firebase Authentication and Firestore for real-time data",
-        "Reduced attendance processing time by 80%"
-      ],
-      tech: ["Flutter", "Dart", "Firebase", "Firestore"],
-      images: ["/assets/image/pam.png"],
-      githubUrl:
-        "https://github.com/felixnatanaelbutarbutar/FLUTTER-ATTENDANCE-APP-USING-FIREBASE.git"
-    },
-    {
-      role: "Backend & Frontend Developer",
-      date: "Jan 2024 – May 2024",
-      title: "Cinema Ticketing System",
-      company: "Desktop Application",
-      description:
-        "Desktop cinema management with dynamic seat selection and payment processing",
-      highlights: [
-        "Dynamic seat selection and validation system",
-        "Automated payment calculation and receipt printing",
-        "Admin module for movie and showtime management"
-      ],
-      tech: ["Java", "Java Swing", "PostgreSQL", "JDBC"],
-      images: ["/assets/image/pbo.png"],
-      githubUrl:
-        "https://github.com/felixnatanaelbutarbutar/OOP-JAVA-APLIKASI-TIKET-BIOSKOP-.git"
-    },
-    {
-      role: "Business Concept Strategist",
-      date: "Oct 2025 – Dec 2025",
-      title: "Toba Essence: Heritage You Can Taste",
-      company: "Cultural Tourism Innovation",
-      description:
-        "Tourism service concept integrating cultural experiences around Lake Toba",
-      highlights: [
-        "Market research and business opportunity validation",
-        "Comprehensive Business Model Canvas creation",
-        "Digital platform prototype design in Figma"
-      ],
-      tech: ["Figma", "BMC", "Market Analysis", "Strategy"],
-      images: ["/assets/image/tekno.png"]
-    },
-    {
-      role: "Web Developer",
-      date: "Jan 2024 – May 2024",
-      title: "HKBP Church Information System",
-      company: "Church Management Platform",
-      description:
-        "Digital church management system serving 300+ congregation members",
-      highlights: [
-        "System architecture and database structure design",
-        "Admin dashboard for financial records and announcements",
-        "Increased administrative efficiency by 70%"
-      ],
-      tech: ["Laravel", "PHP", "MySQL", "Tailwind CSS"],
-      images: [
-        "/assets/image/pa1.png",
-        "/assets/image/pa1login.png",
-        "/assets/image/pa1admin.png",
-        "/assets/image/pa1schema.png"
-      ],
-      githubUrl:
-        "https://github.com/felixnatanaelbutarbutar/SISTEM-INFORMASI-HKBP_PEANAJAGAR.git"
-    },
-    {
-      role: "IT Governance Project",
-      date: "Dec 2025",
-      title: "System Capacity Governance",
-      company: "Dinas X Public Service",
-      description:
-        "Designed capacity management governance for a public service system that frequently failed during peak load.",
-      highlights: [
-        "Assessed current capacity practices using ITIL, COBIT, and ISO 38500",
-        "Identified key bottlenecks and governance gaps",
-        "Designed As-Is vs To-Be capacity processes and improvement roadmap"
-      ],
-      tech: ["COBIT", "ITIL", "ISO 38500"],
-      images: ["/assets/image/tkti.png"]
-    }
-  ];
-
-  // Slider Component dengan lazy loading
-  const ImageSlider = ({ images, onImageClick, isLarge = false }) => {
-    const validImages = images && images.length > 0 ? images : [];
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [loadedImages, setLoadedImages] = useState(new Set([0]));
-
-    useEffect(() => {
-      // Preload adjacent images
-      const preloadIndexes = [
-        currentIndex - 1 >= 0 ? currentIndex - 1 : validImages.length - 1,
-        currentIndex + 1 < validImages.length ? currentIndex + 1 : 0
-      ];
-
-      preloadIndexes.forEach(idx => {
-        if (!loadedImages.has(idx)) {
-          const img = new Image();
-          img.src = validImages[idx];
-          img.onload = () => {
-            setLoadedImages(prev => new Set([...prev, idx]));
-          };
-        }
-      });
-    }, [currentIndex, validImages, loadedImages]);
-
-    if (!validImages.length) return null;
-
-    const handlePrev = (e) => {
-      e.stopPropagation();
-      setCurrentIndex((prev) =>
-        prev === 0 ? validImages.length - 1 : prev - 1
-      );
-    };
-
-    const handleNext = (e) => {
-      e.stopPropagation();
-      setCurrentIndex((prev) =>
-        prev === validImages.length - 1 ? 0 : prev + 1
-      );
-    };
-
-    const handleDotClick = (index, e) => {
-      e.stopPropagation();
-      setCurrentIndex(index);
-    };
-
-    const currentImage = validImages[currentIndex];
-
-    return (
-      <div className={`slider-container ${isLarge ? 'slider-large' : ''}`}>
-        <img
-          src={currentImage}
-          alt={`Screenshot ${currentIndex + 1}`}
-          className={`slider-image ${isLarge ? 'full-visible' : 'project-image'}`}
-          onClick={() => onImageClick(currentImage)}
-          loading={loadedImages.has(currentIndex) ? "eager" : "lazy"}
-          decoding="async"
-        />
-
-        {validImages.length > 1 && (
-          <>
-            <button
-              type="button"
-              className="slider-arrow slider-arrow-left"
-              onClick={handlePrev}
-              aria-label="Previous image"
-            >
-              <FiChevronLeft />
-            </button>
-            <button
-              type="button"
-              className="slider-arrow slider-arrow-right"
-              onClick={handleNext}
-              aria-label="Next image"
-            >
-              <FiChevronRight />
-            </button>
-
-            <div className="slider-dots">
-              {validImages.map((_, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  className={`slider-dot ${idx === currentIndex ? "active" : ""
-                    }`}
-                  onClick={(e) => handleDotClick(idx, e)}
-                  aria-label={`Go to image ${idx + 1}`}
-                />
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-    );
-  };
+  const move = (step) => {
+    setIndex((current) => (current + step + project.images.length) % project.images.length)
+  }
 
   return (
-    <section id="experience" className="experience-section">
-      <div className="experience-container">
-        <h2 className="section-title">Work Experience & Projects</h2>
+    <div className="project-visual">
+      <button
+        className="project-visual__open"
+        type="button"
+        onClick={() => onOpen(project, index)}
+        aria-label={'Open screenshot for ' + project.title}
+      >
+        <img
+          src={project.images[index]}
+          alt={project.title + ' project screenshot'}
+          loading="lazy"
+          decoding="async"
+        />
+        <span className="project-visual__hint">View image <span aria-hidden="true">↗</span></span>
+      </button>
 
-        {/* WORK EXPERIENCE */}
-        <div className="work-experience-wrapper">
-          <div className="category-header">
-            <h3 className="category-title">Work Experience</h3>
-            <div className="category-line" />
+      {project.images.length > 1 && (
+        <div className="project-visual__controls" role="group" aria-label="Screenshot navigation">
+          <button type="button" onClick={() => move(-1)} aria-label={'Previous ' + project.title + ' screenshot'}>
+            <FiArrowLeft aria-hidden="true" />
+          </button>
+          <span>{String(index + 1).padStart(2, '0')} / {String(project.images.length).padStart(2, '0')}</span>
+          <button type="button" onClick={() => move(1)} aria-label={'Next ' + project.title + ' screenshot'}>
+            <FiArrowRight aria-hidden="true" />
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default function ExperienceSection() {
+  const [lightbox, setLightbox] = useState(null)
+  const dialogRef = useRef(null)
+
+  useEffect(() => {
+    if (!lightbox) return undefined
+
+    const previousFocus = document.activeElement
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    dialogRef.current?.focus()
+
+    const handleKeys = (event) => {
+      if (event.key === 'Escape') setLightbox(null)
+      if (event.key === 'ArrowRight') {
+        setLightbox((state) => ({ ...state, index: (state.index + 1) % state.project.images.length }))
+      }
+      if (event.key === 'ArrowLeft') {
+        setLightbox((state) => ({ ...state, index: (state.index - 1 + state.project.images.length) % state.project.images.length }))
+      }
+      if (event.key === 'Tab') {
+        const focusable = [...(dialogRef.current?.querySelectorAll('button') ?? [])]
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last?.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first?.focus()
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeys)
+    return () => {
+      window.removeEventListener('keydown', handleKeys)
+      document.body.style.overflow = previousOverflow
+      previousFocus?.focus?.()
+    }
+  }, [lightbox])
+
+  const openImage = (project, index) => setLightbox({ project, index })
+
+  return (
+    <div className="work-showcase">
+      <section id="projects" className="projects-section section-wrap" aria-labelledby="projects-heading">
+        <div className="projects-section__heading">
+          <div>
+            <span className="section-label">Selected work · 2026</span>
+            <h2 id="projects-heading" className="section-heading">Built to work<br /><em>in the real world.</em></h2>
           </div>
+          <p>Recent systems across applied AI, enterprise workflows, and full-stack product engineering.</p>
+        </div>
 
-          {workExperiences.map((we, index) => (
-            <article
-              key={index}
-              className="work-card featured-work"
-              aria-labelledby={`work-title-${index}`}
-            >
-              <div className="work-badge">{we.badge}</div>
-
-              {/* Image Slider untuk Work Experience */}
-              {we.images && we.images.length > 0 && (
-                <div className="featured-image-wrapper">
-                  <ImageSlider
-                    images={we.images}
-                    onImageClick={openImage}
-                    isLarge={true}
-                  />
-                </div>
-              )}
-
-              <div className="work-header">
-                <div className="work-meta" aria-hidden={false}>
-                  <span className="badge-brand badge-orange work-role">
-                    {we.role}
-                  </span>
-                  <span className="badge-brand badge-teal work-date">
-                    {we.date}
-                  </span>
-                </div>
-
-                <h3 id={`work-title-${index}`} className="work-title">
-                  {we.title}
-                </h3>
-                <p className="work-company-address">
-                  {we.address}
-                </p>
-                <p className="work-description">
-                  {we.description}
-                </p>
+        <div className="featured-projects">
+          {FEATURED_PROJECTS.map((project) => (
+            <article className="featured-project" key={project.id}>
+              <div className="featured-project__top">
+                <span className="featured-project__number">{project.number}</span>
+                <span>{project.date}</span>
               </div>
-
-              <ul className="work-highlights">
-                {we.highlights.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
+              <p className="featured-project__subtitle">{project.subtitle}</p>
+              <h3>{project.title}</h3>
+              <p className="featured-project__description">{project.description}</p>
+              <ul>
+                {project.highlights.map((item) => <li key={item}>{item}</li>)}
               </ul>
-
-              <div className="work-tech">
-                {we.tech.map((tech, i) => {
-                  const IconComponent = getTechIcon(tech);
-                  return (
-                    <span key={i} className="tech-tag">
-                      <IconComponent className="tech-icon" />
-                      <span> {tech}</span>
-                    </span>
-                  );
-                })}
-              </div>
-
-              <div className="project-links">
-                {we.websiteUrl && (
-                  <a
-                    href={we.websiteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="website-link"
-                  >
-                    <FiExternalLink />
-                    <span>Visit Website</span>
-                  </a>
-                )}
-                {we.githubUrl && (
-                  <a
-                    href={we.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="github-link"
-                  >
-                    <FiGithub />
-                    <span>View on GitHub</span>
-                  </a>
-                )}
-              </div>
+              <p className="featured-project__tech">{project.role} <span>·</span> {project.tech.join(' · ')}</p>
             </article>
           ))}
         </div>
 
-        {/* PROJECTS */}
-        <div className="projects-wrapper">
-          <div className="category-header">
-            <h3 className="category-title">Academic & Personal Projects</h3>
-            <div className="category-line" />
-          </div>
+        <div className="project-archive-heading">
+          <h3>More work</h3>
+          <p>Eight projects across web, mobile, machine learning, and systems design.</p>
+        </div>
 
-          <div className="projects-grid">
-            {projects.map((project, index) => (
-              <article key={index} className="project-card">
-                {/* Image Slider untuk Projects */}
-                <div className="project-image-wrapper">
-                  <ImageSlider
-                    images={project.images}
-                    onImageClick={openImage}
-                    isLarge={false}
-                  />
-                </div>
-
+        <div className="project-archive">
+          {PROJECTS.map((project) => (
+            <article className="project-card" key={project.id}>
+              {project.images?.length > 0 && (
+                <ProjectImage project={project} onOpen={openImage} />
+              )}
+              <div className="project-card__content">
                 <div className="project-meta">
-                  <span className="project-role">{project.role}</span>
-                  <span className="project-date">{project.date}</span>
+                  <span>{project.role}</span>
+                  <span>{project.date}</span>
                 </div>
-
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-company">{project.company}</p>
+                <h4>{project.title}</h4>
                 <p className="project-description">{project.description}</p>
-
-                <ul className="project-highlights">
-                  {project.highlights.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
-
-                <div className="project-tech">
-                  {project.tech.map((tech, i) => {
-                    const IconComponent = getTechIcon(tech);
-                    return (
-                      <span key={i} className="tech-badge">
-                        <IconComponent className="tech-icon" />
-                        <span> {tech}</span>
-                      </span>
-                    );
-                  })}
-                </div>
-
-                <div className="project-links">
+                <div className="project-footer">
+                  <p className="project-tech">{project.tech.join(' · ')}</p>
                   {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="github-link"
-                    >
-                      <FiGithub />
-                      <span>GitHub</span>
+                    <a href={project.githubUrl} target="_blank" rel="noreferrer" className="project-link">
+                      Source <FiArrowUpRight aria-hidden="true" />
                     </a>
                   )}
                 </div>
-              </article>
-            ))}
-          </div>
+              </div>
+            </article>
+          ))}
         </div>
-      </div>
+      </section>
 
-      {/* LIGHTBOX MODAL */}
-      {isOpen && modalImage && (
+      <section id="experience" className="experience-section section-wrap" aria-labelledby="experience-heading">
+        <div className="experience-section__heading">
+          <div>
+            <span className="section-label">Experience</span>
+            <h2 id="experience-heading" className="section-heading">Where I’ve<br /><em>contributed.</em></h2>
+          </div>
+          <p>Roles spanning enterprise CRM, applied AI, and international education technology.</p>
+        </div>
+
+        <div className="experience-list">
+          {WORK.map((item, index) => (
+            <article className="experience-item" key={item.id}>
+              <div className="experience-item__meta">
+                <span className="experience-item__index">0{index + 1}</span>
+                <span>{item.date}</span>
+                {item.current && <span className="experience-item__current">Current</span>}
+              </div>
+              <div className="experience-item__content">
+                <div className="experience-item__title">
+                  <div>
+                    <h3>{item.company}</h3>
+                    <p>{item.role} <span>·</span> {item.location}</p>
+                  </div>
+                  {item.websiteUrl && (
+                    <a href={item.websiteUrl} target="_blank" rel="noreferrer" aria-label={'Visit ' + item.company + ' website'}>
+                      <FiArrowUpRight aria-hidden="true" />
+                    </a>
+                  )}
+                </div>
+                <ul>
+                  {item.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+                </ul>
+                <p className="experience-item__tech">{item.tech.join(' · ')}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {lightbox && (
         <div
-          className="lightbox-overlay"
+          className="project-lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label="Image preview"
+          aria-label={lightbox.project.title + ' image preview'}
+          tabIndex={-1}
+          ref={dialogRef}
+          onMouseDown={(event) => { if (event.target === event.currentTarget) setLightbox(null) }}
         >
-          <div className="lightbox-content">
-            <button
-              className="lightbox-close"
-              aria-label="Close"
-              onClick={closeImage}
-            >
-              ✕
+          <button className="project-lightbox__close" type="button" onClick={() => setLightbox(null)} aria-label="Close image preview">
+            <FiX aria-hidden="true" />
+          </button>
+          {lightbox.project.images.length > 1 && (
+            <button className="project-lightbox__previous" type="button" onClick={() => setLightbox((state) => ({ ...state, index: (state.index - 1 + state.project.images.length) % state.project.images.length }))} aria-label="Previous image">
+              <FiArrowLeft aria-hidden="true" />
             </button>
-            <div className="lightbox-main">
-              <img src={modalImage} alt="preview" className="lightbox-image" />
-            </div>
-          </div>
-          <div className="lightbox-backdrop" onClick={closeImage} />
+          )}
+          <figure>
+            <img src={lightbox.project.images[lightbox.index]} alt={lightbox.project.title + ' project screenshot'} />
+            <figcaption>{lightbox.project.title} · {lightbox.index + 1} / {lightbox.project.images.length}</figcaption>
+          </figure>
+          {lightbox.project.images.length > 1 && (
+            <button className="project-lightbox__next" type="button" onClick={() => setLightbox((state) => ({ ...state, index: (state.index + 1) % state.project.images.length }))} aria-label="Next image">
+              <FiArrowRight aria-hidden="true" />
+            </button>
+          )}
         </div>
       )}
-    </section>
-  );
-};
-
-export default ExperienceSection;
+    </div>
+  )
+}

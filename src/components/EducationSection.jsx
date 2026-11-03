@@ -1,77 +1,59 @@
-import React from "react";
-import "../css/EducationSection.css";
+import '../css/EducationSection.css'
 
 const EDUCATION = [
   {
-    id: "itdel",
-    title: "Institut Teknologi Del",
-    date: "Aug 2023 — Sep 2026 (Expected)",
-    score: "IPK 3.35 / 4.00",
-    location: "Laguboti, Toba, North Sumatra",
-    degree: "Diploma — Information Technology",
-    highlights: [
-      "Focus: Software Development & System Design",
-      "3rd Winner — Coding Day Competition 2025"
-    ],
-    logo: "/assets/image/logo1.jpg"
+    id: 'binus',
+    title: 'BINUS University',
+    degree: 'Bachelor of Computer Science',
+    date: 'Sep 2026 — Sep 2028 · Expected',
+    location: 'Jakarta, Indonesia',
+    status: 'In progress',
   },
   {
-    id: "sma",
-    title: "SMA Swasta Bintang Timur 1 Balige",
-    date: "Jul 2020 — Apr 2023",
-    score: null,
-    location: "Balige, Toba, North Sumatra",
-    degree: "Science Major",
-    highlights: [
-      "Focus: Mathematics & Natural Sciences"
-    ],
-    logo: "/assets/image/logo2.png"
-  }
-];
+    id: 'itdel',
+    title: 'Del Institute of Technology',
+    degree: 'Associate Degree in Information Technology',
+    date: 'Sep 2023 — Aug 2026',
+    location: 'Toba, North Sumatra',
+    score: 'GPA 3.50 / 4.00',
+    status: 'Graduated',
+  },
+  {
+    id: 'bintang-timur',
+    title: 'SMA Swasta Bintang Timur 1 Balige',
+    degree: 'Science Major',
+    date: 'Jul 2020 — Apr 2023',
+    location: 'Balige, Toba, North Sumatra',
+  },
+]
 
-const EducationCard = ({ item }) => {
+export default function EducationSection() {
   return (
-    <article className="edu-card" aria-labelledby={`${item.id}-title`}>
-      <div className="edu-card__logo">
-        <img src={item.logo} alt={item.title} />
+    <section className="education section-wrap" aria-labelledby="education-heading">
+      <div className="education__heading">
+        <span className="section-label">Education</span>
+        <h2 id="education-heading" className="section-heading">Learning by<br /><em>building onward.</em></h2>
       </div>
 
-      <div className="edu-card__body">
-        <div className="edu-card__header">
-          <div>
-            <h3 id={`${item.id}-title`} className="edu-card__title">{item.title}</h3>
-            <p className="edu-card__degree">{item.degree}</p>
-          </div>
-          <span className="edu-card__date">{item.date}</span>
-        </div>
-
-        <p className="edu-card__location">{item.location}</p>
-
-        {item.score && <span className="edu-card__score">{item.score}</span>}
-
-        <ul className="edu-card__highlights">
-          {item.highlights.map((text, i) => (
-            <li key={i}>{text}</li>
-          ))}
-        </ul>
-      </div>
-    </article>
-  );
-};
-
-const EducationSection = () => {
-  return (
-    <section id="education" className="section education-section" aria-labelledby="education-title">
-      <div className="education-container">
-        <h2 id="education-title" className="section-title">Education</h2>
-        <div className="edu-list">
-          {EDUCATION.map((item) => (
-            <EducationCard item={item} key={item.id} />
-          ))}
-        </div>
+      <div className="education-list">
+        {EDUCATION.map((item, index) => (
+          <article className="education-item" key={item.id}>
+            <span className="education-item__index">0{index + 1}</span>
+            <div className="education-item__main">
+              <h3>{item.title}</h3>
+              <p>{item.degree}</p>
+            </div>
+            <div className="education-item__meta">
+              <span>{item.date}</span>
+              <span>{item.location}</span>
+            </div>
+            <div className="education-item__result">
+              {item.score && <strong>{item.score}</strong>}
+              {item.status && <span>{item.status}</span>}
+            </div>
+          </article>
+        ))}
       </div>
     </section>
-  );
-};
-
-export default EducationSection;
+  )
+}

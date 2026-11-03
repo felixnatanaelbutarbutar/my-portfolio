@@ -10,8 +10,7 @@
 
 <br/>
 
-> **A modern, responsive personal portfolio website** showcasing my journey as an AI Engineer,  
-> Full-Stack Developer, and Machine Learning enthusiast.
+> **A responsive, editorial portfolio** showcasing software engineering, enterprise systems, and applied AI work.
 
 <br/>
 
@@ -31,15 +30,14 @@ The portfolio is fully live and publicly accessible. Visit to explore all sectio
 
 ## ✨ Features
 
-- 🎨 **Modern Dark UI** — Premium dark-themed design with glassmorphism and gradient accents
-- 🖱️ **Custom Cursor** — Interactive animated cursor for enhanced UX
+- 🎨 **Editorial Portfolio UI** — Warm paper, ink, restrained terracotta, and a serif/sans typographic system
 - 📱 **Fully Responsive** — Optimized for all screen sizes (mobile, tablet, desktop)
 - ⚡ **Blazing Fast** — Powered by Vite (Rolldown) for ultra-fast HMR and builds
-- 🔄 **Smooth Animations** — Scroll-triggered animations with Intersection Observer API
+- 🔄 **Refined Motion** — Restrained transitions with reduced-motion support
 - 🖼️ **Image Lightbox & Slider** — Lazy-loaded image sliders with fullscreen preview modal
-- 📬 **Contact Form** — Functional contact section for direct outreach
-- 🏆 **Certificate Gallery** — Showcase of professional certifications
-- 🔧 **Tech Stack Badges** — Icon-mapped technology tags for each project/role
+- 📬 **Contact Links** — Direct email, WhatsApp, phone, and social profiles
+- 🏆 **Credentials & Recognition** — Education, training, and competition results
+- 🔧 **Project Archive** — Selected case studies and earlier work
 
 ---
 
@@ -51,26 +49,43 @@ The portfolio is fully live and publicly accessible. Visit to explore all sectio
 | **About** | Personal background and summary |
 | **Skills** | Technical skills and proficiencies |
 | **Experience** | Work experience and personal/academic projects |
+| **Recognition** | Competition results and academic achievements |
 | **Education** | Academic background |
 | **Certificates** | Professional certifications |
-| **Contact** | Contact form and social links |
+| **Contact** | Direct contact methods and social links |
 
 ---
 
 ## 💼 Work Experience
 
-### 🤖 INaAI — PT Teknologi Cerdas Berdaulat Indonesia
-**AI Engineer Intern** · Central Jakarta, DKI Jakarta · *Feb 2026 – Aug 2026*
-- Contributed to multiple real-world AI/ML projects for enterprise clients
-- Developed, trained, and evaluated AI models for various applications
-- Delivered end-to-end AI/ML solutions for **PT Mayora Indah Tbk.** and **PT Prima Abadi Distribusi**
+### 💼 PT Bintang Aplikasi Perkasa
+**Software Engineer** · South Jakarta, DKI Jakarta · *Aug 2026 – Present*
+- Develops enterprise CRM solutions using Microsoft Dynamics 365 and .NET (C#)
+- Designs MSSQL schemas, queries, and stored procedures
+- Builds n8n and AI workflows with Whisper and LLMs for CRM ticket processing
 
-### 🌐 PT AOKI MORI INDONESIA
-**Web Developer** · Siborongborong, North Sumatera · *Aug 2025 – May 2026*
-- Built multilingual company profile + e-learning platform + student registration system
-- Engineered backend with Golang and responsive frontend with Next.js
-- Implemented multilingual support (Japanese, English, Indonesian) with dynamic switching
+### 🤖 PT Teknologi Cerdas Berdaulat Indonesia (INaAI)
+**AI Engineer Intern** · Central Jakarta, DKI Jakarta · *Feb 2026 – Aug 2026*
+- Contributed to five enterprise projects across computer vision, LLM evaluation, and commodity analytics
+- Worked with projects for **Mayora**, **Prima Abadi Distribusi**, **BPJS Ketenagakerjaan**, and **Polda Jakarta**
+- Prepared shopper analytics data across 58 CCTV cameras and evaluated an AI health-triage chatbot
+
+### 🌐 PT Aoki Mori Indonesia
+**Full-Stack Developer** · Siborongborong, North Sumatra · *Apr 2025 – Dec 2025*
+- Built an academic platform with Go, GORM, JWT, and Next.js / TypeScript, including 30+ REST API endpoints
+- Developed e-learning, online registration, and multilingual support in Japanese, English, and Indonesian
+- Containerized services with Docker Compose
 - Live at → [lpkmoricentre.co.id](https://lpkmoricentre.co.id)
+
+---
+
+## 🏅 Selected Projects & Competitions
+
+- **RuangRPP** — AI-assisted curriculum and lesson-planning platform (Aug 2026)
+- **GlitchRun** — Real-time multiplayer crash game platform (May 2026)
+- Earlier portfolio projects remain listed on the website, including IELTS evaluation, IT Del student information, student stress prediction, DelCheckIn, cinema ticketing, HKBP information system, Toba Essence, and system capacity governance.
+- **Finalist**, DEL AI Hackathon (National), Institut Teknologi Del (2026)
+- **3rd Place**, Coding Day Competition, Faculty of Vocational Studies (2025)
 
 ---
 
@@ -105,6 +120,7 @@ my-portfolio/
 │   │   ├── AboutSection.jsx
 │   │   ├── SkillsSection.jsx
 │   │   ├── ExperienceSection.jsx
+│   │   ├── AchievementSection.jsx
 │   │   ├── EducationSection.jsx
 │   │   ├── CertificateSection.jsx
 │   │   ├── ContactSection.jsx
@@ -171,12 +187,11 @@ npm run preview
 
 ## 🎨 Design Highlights
 
-- **Color Palette** — Deep navy backgrounds with indigo/purple gradient accents
-- **Typography** — Modern Google Fonts for clean, readable text hierarchy
-- **Glassmorphism** — Frosted glass card effects throughout the UI
-- **Micro-animations** — Hover states, scroll reveals, and smooth transitions
-- **Custom Cursor** — Branded interactive cursor experience
-- **Image Slider** — Built-in carousel with lazy loading and dot navigation
+- **Color Palette** — Warm paper, dark ink, muted stone, and restrained terracotta
+- **Typography** — Newsreader display paired with IBM Plex Sans for interface and body text
+- **Layout** — Editorial grid, open project lists, and image-led case studies
+- **Motion** — Short interactions that respect reduced-motion preferences
+- **Image Slider** — Keyboard-operable image preview with lazy loading
 
 ---
 
@@ -185,7 +200,7 @@ npm run preview
 **Felix Natanael Butarbutar**
 
 [![Website](https://img.shields.io/badge/Website-felixnatanael.my.id-6366f1?style=flat-square&logo=googlechrome&logoColor=white)](https://www.felixnatanael.my.id)
-[![Email](https://img.shields.io/badge/Email-felixbutarbutar2017%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:felixbutarbutar2017@gmail.com)
+[![Email](https://img.shields.io/badge/Email-felixnatb%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:felixnatb@gmail.com)
 [![GitHub](https://img.shields.io/badge/GitHub-felixnatanaelbutarbutar-181717?style=flat-square&logo=github)](https://github.com/felixnatanaelbutarbutar)
 
 ---
