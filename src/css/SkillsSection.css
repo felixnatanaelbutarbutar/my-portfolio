@@ -32,8 +32,29 @@
 }
 
 .skills__group {
+  position: relative;
   padding-top: 15px;
   border-top: 1px solid var(--line);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.skills__group::before {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+  content: '';
+  transition: width var(--duration-base) var(--ease-out);
+}
+
+.skills__group:hover {
+  transform: translateY(-2px);
+}
+
+.skills__group:hover::before {
+  width: 46px;
 }
 
 .skills__group h3 {

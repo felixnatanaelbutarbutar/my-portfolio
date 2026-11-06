@@ -1,10 +1,25 @@
 .hero {
   position: relative;
+  isolation: isolate;
   min-height: min(900px, 100svh);
   padding: 132px var(--gutter) 76px;
   display: grid;
   align-items: center;
   overflow: hidden;
+  background-image: radial-gradient(ellipse at 82% 40%, rgba(232, 217, 208, .38), transparent 38%);
+}
+
+.hero::before {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: -10vw;
+  width: clamp(420px, 58vw, 820px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(139, 70, 55, .1);
+  border-radius: 50%;
+  content: '';
+  pointer-events: none;
 }
 
 .hero__inner {
@@ -137,6 +152,7 @@
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: #e6e1d8;
+  box-shadow: 12px 12px 0 -11px rgba(139, 70, 55, .55);
 }
 
 .hero__portrait-frame::after {
@@ -183,11 +199,17 @@
 
 .hero__scroll svg {
   color: var(--accent);
+  animation: scroll-cue 2.6s var(--ease-standard) infinite;
 }
 
 @keyframes hero-arrive {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scroll-cue {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
 }
 
 @media (max-width: 850px) {
@@ -212,6 +234,12 @@
 @media (max-width: 620px) {
   .hero {
     padding: 112px var(--gutter) 84px;
+  }
+
+  .hero::before {
+    top: 36%;
+    right: -58%;
+    width: 112vw;
   }
 
   .hero__inner {
